@@ -1,0 +1,304 @@
+* { box-sizing: border-box; font-family:"Segoe UI", Arial, sans-serif; }
+body { margin:0; display:flex; flex-direction:column; min-height:100vh; background:#f4f6f9; }
+
+/* Header (Top) */
+header {
+    height:60px; background:#1f2c3d; color:#fff;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:0 30px; box-shadow:0 3px 10px rgba(0,0,0,0.1);
+    position:sticky; top:0; z-index:100;
+}
+header .logo { font-weight:bold; font-size:20px; }
+header .user { display:flex; align-items:center; gap:10px; }
+
+/* Layout */
+.container { display:flex; flex:1; min-height:calc(100vh - 100px); }
+
+/* Sidebar */
+.sidebar {
+    width:240px; background:#223449; color:#fff; display:flex; flex-direction:column;
+}
+.sidebar h2 { padding:20px; margin:0; font-size:18px; border-bottom:1px solid #192832; }
+.sidebar ul { list-style:none; padding:0; margin:0; }
+
+/* 메뉴 기본 스타일 */
+.sidebar li { position:relative; cursor:pointer; transition:all 0.3s ease; }
+.sidebar .menu-title {
+    padding:15px 20px; display:flex; align-items:center; gap:12px;
+}
+.sidebar .menu-title:hover { background:#2a4b6c; }
+.sidebar li i { min-width:18px; text-align:center; }
+.sidebar li .arrow { margin-left:auto; transition: transform 0.3s ease; }
+
+/* 하위 메뉴 (ㄴ 계층 구조) */
+.sidebar .submenu {
+    display: none;
+    background:#1b2b3d;
+    padding: 5px 0;
+}
+.sidebar .submenu li {
+    padding: 10px 20px 10px 45px;
+    font-size: 14px;
+    color: #bdc3c7;
+    border: none;
+}
+.sidebar .submenu li::before {
+    content: "└";
+    position: absolute;
+    left: 28px;
+    color: #5d6d7e;
+}
+.sidebar .submenu li:hover { background:#2a4b6c; color:#fff; }
+
+/* 오픈 상태일 때 화살표 회전 */
+.sidebar li.open .arrow { transform:rotate(90deg); }
+
+/* Main Content Area */
+.main { flex:1; padding:30px; overflow-y:auto; }
+
+/* Cards */
+.cards { display:grid; grid-template-columns:repeat(auto-fit, minmax(180px,1fr)); gap:20px; }
+.card { position:relative; color:#fff; padding:20px; border-radius:12px;
+    overflow:hidden; box-shadow:0 8px 20px rgba(0,0,0,0.1);
+    cursor:pointer; transition:transform 0.2s, box-shadow 0.2s;
+}
+.card:hover { transform:translateY(-5px); box-shadow:0 15px 25px rgba(0,0,0,0.15); }
+.card::after { content:''; position:absolute; width:150%; height:150%; background:rgba(255,255,255,0.05); top:-25%; left:-25%; transform:rotate(45deg); }
+.card h3 { margin:0 0 10px; font-size:16px; font-weight:600; }
+.card p { margin:0; font-size:32px; font-weight:bold; }
+.blue { background:linear-gradient(135deg,#3498db,#2980b9); }
+.green { background:linear-gradient(135deg,#2ecc71,#27ae60); }
+.orange { background:linear-gradient(135deg,#e67e22,#d35400); }
+.purple { background:linear-gradient(135deg,#9b59b6,#8e44ad); }
+
+/* Section Table */
+.section { background:#fff; margin-top:30px; padding:25px; border-radius:12px; box-shadow:0 5px 15px rgba(0,0,0,0.05); }
+.section h3 { margin-top:0; font-weight:600; }
+#datepicker { padding:10px 14px; border-radius:8px; border:1px solid #ccc; width:200px; font-size:14px; transition:all 0.3s ease; box-shadow:0 2px 5px rgba(0,0,0,0.08); }
+#datepicker:focus { border-color:#3498db; box-shadow:0 4px 12px rgba(52,152,219,0.3); outline:none; }
+
+table { width:100%; border-collapse:collapse; margin-top:15px; }
+th, td { padding:12px; text-align:left; border-bottom:1px solid #eee; }
+th { background:#f9f9f9; font-weight:600; }
+tbody tr:hover { background:#ecf4fb; }
+
+/* Footer */
+footer { background:#fafafa; padding:15px 30px; text-align:center; font-size:13px; color:#888; border-top:1px solid #eee; flex-shrink:0; }
+
+/* 반응형 */
+@media(max-width:768px) { .sidebar{width:60px;} .sidebar li span, .sidebar .arrow, .sidebar h2, .sidebar .submenu {display:none !important;} .cards{grid-template-columns:repeat(auto-fit,minmax(140px,1fr));} }
+
+.form-cls {
+	flex:1;
+}
+
+.menu-link {
+    color: inherit;          /* 부모 색상 유지 */
+    text-decoration: none;   /* 밑줄 제거 */
+}
+
+.menu-link:hover,
+.menu-link:focus,
+.menu-link:active,
+.menu-link:visited {
+    color: inherit;
+    text-decoration: none;
+    outline: none;
+    box-shadow: none;
+}
+
+/* ===============================
+   메뉴관리 화면 전용 (추가)
+   =============================== */
+
+/* 메뉴관리 전체 박스 (section 느낌) */
+.menu-page {
+	background:#f4f6f9;
+}
+
+.menu-container {
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.05);
+    flex:1;
+}
+
+/* 좌측 트리 / 우측 관리 영역 */
+.menu-layout {
+    display:grid;
+    grid-template-columns:320px 1fr;
+    gap:30px;
+}
+
+/* ===== 좌측 jstree 영역 ===== */
+.menu-tree {
+    border-right:1px solid #eee;
+    padding-right:20px;
+}
+
+.menu-tree h3 {
+    margin:0 0 15px;
+    font-size:16px;
+    font-weight:600;
+}
+
+/* ===== 우측 메뉴 관리 폼 ===== */
+.menu-info-box h3 {
+    margin:0 0 15px;
+    font-size:16px;
+    font-weight:600;
+}
+
+.menu-info-box .form-row {
+    margin-bottom:15px;
+}
+
+.menu-info-box label {
+    display:block;
+    margin-bottom:6px;
+    font-size:13px;
+    color:#555;
+}
+
+.menu-info-box input,
+.menu-info-box select {
+    width:100%;
+    padding:10px 12px;
+    border-radius:8px;
+    border:1px solid #ccc;
+    font-size:14px;
+}
+
+/* ===== 버튼 영역 ===== */
+.menu-info-box .form-actions {
+    margin-top:20px;
+    display:flex;
+    gap:10px;
+}
+
+.menu-info-box .btn {
+    padding:10px 16px;
+    border-radius:8px;
+    border:none;
+    cursor:pointer;
+    font-size:14px;
+}
+
+.menu-info-box .btn.primary {
+    background:#3498db;
+    color:#fff;
+}
+
+.menu-info-box .btn.secondary {
+    background:#bdc3c7;
+    color:#2c3e50;
+}
+
+.menu-info-box .btn.danger {
+    background:#e74c3c;
+    color:#fff;
+}
+
+/* ===== 메뉴 관리 화면 - 입력 폼 그리드 ===== */
+.menu-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px 32px;
+    margin-top: 20px;
+}
+
+/* form-row 재정의 */
+.menu-form-grid .form-row {
+    display: flex;
+    flex-direction: column;
+}
+
+/* label */
+.menu-form-grid label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 6px;
+}
+
+/* input */
+.menu-form-grid input {
+    height: 44px;
+    padding: 0 14px;
+    border-radius: 8px;
+    border: 1px solid #dcdcdc;
+    font-size: 14px;
+    background: #fff;
+}
+
+.menu-form-grid input:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52,152,219,0.15);
+    outline: none;
+}
+
+/* 버튼 영역 */
+.form-actions {
+    margin-top: 30px;
+    display: flex;
+    gap: 10px;
+}
+
+
+/* ===== jstree 디자인 기존 톤에 맞춤 ===== */
+.jstree-default .jstree-anchor {
+    padding:8px 10px;
+    font-size:14px;
+}
+
+.jstree-default .jstree-hovered {
+    background:#ecf4fb;
+}
+
+.jstree-default .jstree-clicked {
+    background:#d6eaff;
+    color:#2c3e50;
+}
+/* ===== jstree 정렬 보정 ===== */
+.jstree-wrapper .jstree-anchor {
+    display: inline-flex;
+    align-items: center;
+    height: 30px;
+    line-height: 30px;
+    padding-left: 4px;
+}
+
+.jstree-wrapper .jstree-icon {
+    margin-right: 6px;
+}
+
+/* 화살표 영역 고정 */
+.jstree-wrapper .jstree-ocl {
+    width: 18px;
+    margin-right: 2px;
+}
+/* ===== 메뉴 트리 박스 ===== */
+.menu-tree-box {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    min-height: 450px;
+}
+
+/* 박스 타이틀 */
+.menu-tree-box .box-title {
+    margin: 0 0 15px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #2c3e50;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.menu-info-box {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+}

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="devel.cmmn.login.mapper.LoginMapper">
+
+	<!-- 로그인 ID 실패카운트 조회 -->
+	<select id="selectLoginFailCnt" parameterType="Map" resultType="String">
+		/* LoginMapper.selectLoginFailCnt */
+		SELECT
+			FAIL_CNT
+		FROM
+			TB_USER_INFO
+		WHERE
+			MEMBER_ID = #{memberId}
+	</select>
+
+	<!-- 아이디 승인 체크 -->
+	<select id="selectConfmYn" parameterType="Map" resultType="String">
+		/* LoginMapper.selectConfmYn */
+		SELECT
+			CONFM_YN
+		FROM
+			TB_USER_INFO
+		WHERE
+			MEMBER_ID = #{memberId}
+	</select>
+
+	<!-- 로그인 정보 조회 -->
+	<select id="actionLogin" parameterType="Map" resultType="LoginVO">
+		/* LoginMapper.actionLogin */
+		SELECT
+			 A.MEMBER_ID		AS memberId
+			,A.AUTH_GRP_CD		AS authGrpCd
+			,A.MEMBER_NM		AS memberNm
+			,A.MASTER_CODE		AS masterCode
+			,A.MEMBER_EMAIL		AS memberEmail
+			,A.MEMBER_BRTHDY	AS memberBrthdy
+			,A.MEMBER_PHONE		AS memberPhone
+			,A.MEMBER_POST		AS memberPost
+			,A.MEMBER_ADDR		AS memberAddr
+			,A.MEMBER_ADDR_DETL	AS memberAddrDetl
+			,DATE_FORMAT(A.LAST_LOGIN_DT, '%Y%m%d') AS lastLoginDt
+			,A.FAIL_CNT			AS failCnt
+	    FROM
+	    	TB_USER_INFO A
+	 	WHERE
+	 		A.MEMBER_ID = #{memberId}
+	    AND
+	    	A.MEMBER_PW = #{memberPw}
+	   	AND
+	   		A.USE_YN = 'Y'
+	</select>
+
+	<!-- 로그인 이력 저장 -->
+	<insert id="insertLoginHis"  parameterType="Map">
+		/* LoginMapper.insertLoginHis */
+		INSERT INTO TB_LOGIN_HIS(
+		    MEMBER_ID,
+		    LOGIN_IP,
+		    LOGIN_DT
+		)VALUES(
+		    #{memberId},
+		    #{loginIp},
+		    NOW()
+		)
+	</insert>
+
+	<!-- 로그인 실패 카운트 처리 -->
+	<update id="updateUserFailCnt" parameterType="Map">
+		/* LoginMapper.updateUserFailCnt */
+		UPDATE
+			TB_USER_INFO
+		SET
+			FAIL_CNT = #{failCnt}
+		WHERE
+			MEMBER_ID = #{memberId}
+	</update>
+
+	<!-- 아이디 중복체크 -->
+	<select id="checkId" parameterType="Map" resultType="int">
+		/* LoginMapper.checkId */
+		SELECT
+			COUNT(1)
+		FROM
+			TB_USER_INFO
+		WHERE
+			MEMBER_ID = #{memberId}
+	</select>
+
+	<!-- 회원 등록 -->
+	<insert id="insertSignUp" parameterType="Map">
+		/* LoginMapper.insertSignUp */
+		INSERT INTO TB_USER_INFO (
+			 MEMBER_ID
+			,MEMBER_NM
+			,MEMBER_PW
+			,MEMBER_EMAIL
+			,MEMBER_BRTHDY
+			,MEMBER_PHONE
+			,MEMBER_POST
+			,MEMBER_ADDR
+			,MEMBER_ADDR_DETL
+		) VALUES (
+			 #{memberId}
+			,#{memberNm}
+			,#{memberPw}
+			,#{memberEmail}
+			,#{memberBrthdy}
+			,#{memberPhone}
+			,#{memberPost}
+			,#{memberAddr}
+			,#{memberAddrDetl}
+		)
+	</insert>
+</mapper>
