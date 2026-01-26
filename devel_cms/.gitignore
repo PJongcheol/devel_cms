@@ -139,3 +139,4 @@ HELP.md
 mvnw
 mvnw.cmd
 maven-wrapper.properties
+application.properties
