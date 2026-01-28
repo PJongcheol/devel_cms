@@ -34,7 +34,7 @@ public class AdminMenuServiceImpl implements AdminMenuService{
 	AdminMenuMapper adminMenuMapper;
 
 	/**
-	 * 메뉴 리스트 조회
+	 * 메뉴목록 리스트 조회
 	 * @param Map
 	 * @return List
 	 * @exception Exception
@@ -80,5 +80,70 @@ public class AdminMenuServiceImpl implements AdminMenuService{
 	            childrenMenu(child, menuList, list);
 	        }
 	    }
+	}
+
+	/**
+	 * 메뉴목록관리 저장
+	 * @param Map
+	 * @return void
+	 * @exception Exception
+	 */
+	@Override
+	public void insertMenu(Map<String, Object> param) throws Exception {
+		adminMenuMapper.insertMenu(param);
+	}
+
+	/**
+	 * 메뉴목록관리 수정
+	 * @param Map
+	 * @return void
+	 * @exception Exception
+	 */
+	@Override
+	public void updateMenu(Map<String, Object> param) throws Exception {
+		adminMenuMapper.updateMenu(param);
+	}
+
+	/**
+	 * 메뉴목록관리 삭제
+	 * @param Map
+	 * @return void
+	 * @exception Exception
+	 */
+	@Override
+	public void deleteMenu(Map<String, Object> param) throws Exception {
+		adminMenuMapper.deleteMenu(param);
+	}
+
+	/**
+	 * 메뉴권한관리 목록 조회
+	 * @param Map
+	 * @return List
+	 * @exception Exception
+	 */
+	public List<Map<String, Object>> selectMenuAuthList(Map<String, Object> param) throws Exception {
+		return adminMenuMapper.selectMenuAuthList(param);
+	}
+
+	/**
+	 * 메뉴권한 저장
+	 * @param List
+	 * @return void
+	 * @exception Exception
+	 */
+	@Override
+	public void insertMenuAuth(List<Map<String, Object>> param) throws Exception {
+		adminMenuMapper.insertMenuAuth(param);
+	}
+
+	/**
+	 * 메뉴권한 저장
+	 * @param List
+	 * @return void
+	 * @exception Exception
+	 */
+	@Override
+	public void deleteMenuAuth(List<Map<String, Object>> param) throws Exception {
+		adminMenuMapper.deleteMenuAuth(param);
 	}
 }

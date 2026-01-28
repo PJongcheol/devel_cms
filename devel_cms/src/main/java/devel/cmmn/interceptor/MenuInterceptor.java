@@ -30,8 +30,9 @@ public class MenuInterceptor implements HandlerInterceptor {
     	LoginVO user = (LoginVO) request.getSession().getAttribute("LoginVO");
 
         if (user != null) {
-            List<MenuVO> userMenu = menuService.getMenu("user");
-            List<MenuVO> leftAdminMenu = menuService.getMenu("admin");
+            String authGtpCd = user.getAuthGrpCd();
+        	List<MenuVO> userMenu = menuService.getMenu("user", authGtpCd);
+            List<MenuVO> leftAdminMenu = menuService.getMenu("admin", authGtpCd);
 
             request.setAttribute("userMenu", userMenu);
             request.setAttribute("leftAdminMenu", leftAdminMenu);

@@ -22,10 +22,58 @@ import java.util.Map;
 
 public interface AdminMenuService {
 	/**
-	 * 메뉴 리스트 조회
+	 * 메뉴목록 리스트 조회
 	 * @param Map
 	 * @return List
 	 * @exception Exception
 	 */
 	public List<Map<String, Object>> getMenuList(Map<String, Object> param) throws Exception;
+
+	/**
+	 * 메뉴목록관리 저장
+	 * @param Map
+	 * @return void
+	 * @exception Exception
+	 */
+	public void insertMenu(Map<String, Object> param) throws Exception;
+
+	/**
+	 * 메뉴목록관리 수정
+	 * @param Map
+	 * @return void
+	 * @exception Exception
+	 */
+	public void updateMenu(Map<String, Object> param) throws Exception;
+
+	/**
+	 * 메뉴목록관리 삭제
+	 * @param Map
+	 * @return void
+	 * @exception Exception
+	 */
+	public void deleteMenu(Map<String, Object> param) throws Exception;
+
+	/**
+	 * 메뉴권한관리 목록 조회
+	 * @param Map
+	 * @return List
+	 * @exception Exception
+	 */
+	public List<Map<String, Object>> selectMenuAuthList(Map<String, Object> param) throws Exception;
+
+	/**
+	 * 메뉴권한 저장
+	 * @param List
+	 * @return void
+	 * @exception Exception
+	 */
+	public void insertMenuAuth(List<Map<String, Object>> param) throws Exception;
+
+	/**
+	 * 메뉴권한 삭제
+	 * @param List
+	 * @return void
+	 * @exception Exception
+	 */
+	public void deleteMenuAuth(List<Map<String, Object>> param) throws Exception;
 }

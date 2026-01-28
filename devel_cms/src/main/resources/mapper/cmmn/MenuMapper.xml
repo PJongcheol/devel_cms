@@ -6,23 +6,33 @@
 	<select id="getMenu" parameterType="Map" resultType="devel.cmmn.menu.vo.MenuVO">
 		/* MenuMapper.getMenu */
 		SELECT
-			 MENU_ID 		AS menuId
-			,MENU_PID 		AS menuPid
-			,MENU_NM 		AS menuNm
-			,MENU_ORDR 		AS menuOrdr
-			,MENU_TYPE 		AS menuType
-			,MENU_DEPTH 	AS menuDepth
-			,MENU_URL 		AS menuUrl
-			,MENU_ICON 		AS menuIcon
-			,USE_YN 		AS useYn
-			,SITE_CODE 		AS siteCode
+			 A.MENU_ID 			AS menuId
+			,A.MENU_PID 		AS menuPid
+			,A.MENU_NM 			AS menuNm
+			,A.MENU_ORDR 		AS menuOrdr
+			,A.MENU_TYPE 		AS menuType
+			,A.MENU_DEPTH 		AS menuDepth
+			,A.MENU_URL 		AS menuUrl
+			,A.MENU_ICON 		AS menuIcon
+			,A.USE_YN 			AS useYn
+			,A.SITE_CODE 		AS siteCode
 		FROM
-			TB_MENU
-		WHERE
-			MENU_DEPTH != '0'
+			TB_MENU A
+		LEFT JOIN
+			TB_MENU_AUTH B
+		ON
+			A.MENU_ID = B.MENU_ID
 		AND
-			SITE_CODE = #{siteCode}
+			A.MENU_PID = B.MENU_PID
+		AND
+			A.SITE_CODE = B.SITE_CODE
+		WHERE
+			A.MENU_DEPTH != '0'
+		AND
+			A.SITE_CODE = #{siteCode}
+		AND
+			B.AUTH_GRP_CD = #{authGrpCd}
 		ORDER BY
-			MENU_ORDR ASC
+			A.MENU_ORDR ASC
 	</select>
 </mapper>

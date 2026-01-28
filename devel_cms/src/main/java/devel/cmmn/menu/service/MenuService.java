@@ -27,5 +27,5 @@ public interface MenuService {
 	 * @return List<MenuVO>
 	 * @exception Exception
 	 */
-	public List<MenuVO> getMenu(String param) throws Exception;
+	public List<MenuVO> getMenu(String param, String authGrpCd) throws Exception;
 }

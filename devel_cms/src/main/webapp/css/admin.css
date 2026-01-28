@@ -160,7 +160,7 @@ footer { background:#fafafa; padding:15px 30px; text-align:center; font-size:13p
     color:#555;
 }
 
-.menu-info-box input,
+/* .menu-info-box input, */
 .menu-info-box select {
     width:100%;
     padding:10px 12px;
@@ -302,3 +302,78 @@ footer { background:#fafafa; padding:15px 30px; text-align:center; font-size:13p
     padding: 25px;
     box-shadow: 0 6px 18px rgba(0,0,0,0.06);
 }
+
+/* 메뉴 트리 헤더: select만 */
+.menu-tree-header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* 왼쪽 정렬 */
+    margin-bottom: 10px;
+}
+
+/* label과 select 간격 */
+.menu-role-select label {
+    margin-right: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.menu-role-select select {
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    background: #fff;
+}
+
+/* 구분선 */
+.box-separator {
+    border-bottom: 1px solid #eee;
+    margin-bottom: 15px;
+}
+/* ===============================
+   권한 테이블 전용
+   =============================== */
+
+.auth-block {
+    margin-top: 30px;
+}
+
+.auth-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 8px;
+}
+
+/* table 외부 래퍼 */
+.auth-table-wrap {
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+}
+
+/* 권한 테이블 내부만 */
+.auth-table-wrap table {
+    width: 100%;
+    margin: 0;
+}
+
+.auth-table-wrap td {
+    padding: 12px 14px;
+    font-size: 14px;
+    color: #333;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.auth-table-wrap tr:last-child td {
+    border-bottom: none;
+}
+
+.auth-table-wrap tr:hover {
+    background: #f8fafc;
+}
+
+

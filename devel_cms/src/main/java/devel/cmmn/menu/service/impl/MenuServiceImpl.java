@@ -48,8 +48,10 @@ public class MenuServiceImpl implements MenuService{
 	    key = "#param"
 	)
 	@Override
-	public List<MenuVO> getMenu(String param) throws Exception {
+	public List<MenuVO> getMenu(String param, String authGrpCd) throws Exception {
 		Map<String, Object> newParam = new HashMap<>();
+
+		newParam.put("authGrpCd", authGrpCd);
 
 		if("admin".equals(param)) {
 			newParam.put("siteCode", "admin");
