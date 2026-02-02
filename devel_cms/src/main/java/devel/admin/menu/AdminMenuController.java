@@ -41,7 +41,7 @@ import tools.jackson.databind.ObjectMapper;
 
 @Controller
 @RequestMapping("/admin/menu")
-public class AdminMenuController  extends BaseController{
+public class AdminMenuController extends BaseController {
 
 	@Autowired
 	private AdminMenuService adminMenuService;
