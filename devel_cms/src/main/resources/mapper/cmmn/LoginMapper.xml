@@ -100,6 +100,7 @@
 			,MEMBER_POST
 			,MEMBER_ADDR
 			,MEMBER_ADDR_DETL
+			,AGREE_YN
 		) VALUES (
 			 #{memberId}
 			,#{memberNm}
@@ -110,6 +111,7 @@
 			,#{memberPost}
 			,#{memberAddr}
 			,#{memberAddrDetl}
+			,#{agreeYn}
 		)
 	</insert>
 </mapper>

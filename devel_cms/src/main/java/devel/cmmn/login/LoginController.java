@@ -210,4 +210,23 @@ public class LoginController {
 		return result;
 
 	}
+
+	/**
+     * 로그아웃
+     * @Method : logout
+     * @param request
+     * @param response
+     * @param throws
+     * @throws Exception
+     * @return : map
+     */
+	@GetMapping(value ="/login/logout.do")
+	public String logout(@RequestParam Map<String, Object> param
+			, ModelMap model, HttpSession session) throws Exception {
+		Map<String, Object> result = new HashMap<>();
+
+		session.removeAttribute("LoginVO");
+
+		return "redirect:/login.do";
+	}
 }

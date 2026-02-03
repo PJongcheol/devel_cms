@@ -123,6 +123,20 @@ body {
     margin-bottom : 3px;
 }
 
+/* Button */
+.dev-btn-gray-50 {
+    width: 49%;
+    padding: 12px;
+    background: #D3D3D3;
+    border: none;
+    color: #fff;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom : 3px;
+}
+
 .btn-30:hover {
     background: #2980b9;
 }
@@ -345,4 +359,10 @@ th {
     border-radius: 4px;
     padding: 4px 6px;
     font-size: 13px;
+}
+
+.agree-box {
+	margin: 15px 0;
+	font-size: 14px;
+	text-align: center;
 }

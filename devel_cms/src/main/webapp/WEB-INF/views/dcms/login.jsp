@@ -64,9 +64,9 @@
 	            <input class="input" type="password" id="memberPw" name="memberPw" placeholder="비밀번호를 입력하세요" />
 
 	            <button type="button" onclick="fn_login()" class="dev-btn">로그인</button>
-	            <button type="button" onclick="fn_signUp()" class="dev-btn-gray">회원가입</button>
+	            <button type="button" onclick="fn_signUp()" class="dev-btn-gray-50">회원가입</button>
+	            <a href="/login/idSearch.do" class="dev-btn-gray-50">아이디찾기</a>
 		    </div>
-
 		    <div class="dev-footer">
 		        © 2026 CMS Admin System
 		    </div>
