@@ -28,4 +28,7 @@ public interface LoginMapper {
 
 	// 회원 등록
 	public void insertSignUp(Map<String, Object> param);
+
+	// 아이디 찾기
+	public Map<String, Object> selectId(Map<String, Object> param);
 }

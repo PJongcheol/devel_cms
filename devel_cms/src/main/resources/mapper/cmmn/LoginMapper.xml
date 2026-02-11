@@ -114,4 +114,21 @@
 			,#{agreeYn}
 		)
 	</insert>
+
+	<!-- 아이디 찾기 -->
+	<select id="selectId" parameterType="Map" resultType="Map">
+		/* LoginMapper.selectId */
+		SELECT
+			MEMBER_ID	AS memberId
+		FROM
+			TB_USER_INFO
+		WHERE
+			MEMBER_NM = #{memberNm}
+		AND
+			MEMBER_EMAIL = #{memberEmail}
+		AND
+			MEMBER_BRTHDY = #{memberBrthdy}
+		AND
+			MEMBER_PHONE = #{memberPhone}
+	</select>
 </mapper>

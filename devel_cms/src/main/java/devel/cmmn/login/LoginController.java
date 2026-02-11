@@ -149,7 +149,7 @@ public class LoginController {
      * @throws Exception
      * @return : String
      */
-	@PostMapping(value ="/login/signUp.do")
+	@GetMapping(value ="/login/signUp.do")
 	public String signUpForm(@RequestParam Map<String, Object> param
 			, ModelMap model, HttpSession session) throws Exception {
 
@@ -205,6 +205,48 @@ public class LoginController {
 
 		loginService.insertSignUp(param);
 
+		result.put("message", "ok");
+
+		return result;
+
+	}
+
+	/**
+     * 아이디 찾기 폼
+     * @Method : searchIdForm
+     * @param request
+     * @param response
+     * @param throws
+     * @throws Exception
+     * @return : String
+     */
+	@GetMapping(value ="/login/searchId.do")
+	public String searchId(@RequestParam Map<String, Object> param
+			, ModelMap model, HttpSession session) throws Exception {
+
+		session.removeAttribute("LoginVO");
+
+		return "dcms/searchId";
+
+	}
+
+	/**
+     * 아이디 찾기 ajax
+     * @Method : searchUserId
+     * @param request
+     * @param response
+     * @param throws
+     * @throws Exception
+     * @return : map
+     */
+	@PostMapping(value ="/login/searchUserId.do")
+	@ResponseBody
+	public Map<String, Object> searchUserId(@RequestParam Map<String, Object> param
+			, ModelMap model, HttpSession session) throws Exception {
+		Map<String, Object> result = new HashMap<>();
+		Map<String, Object> detail = loginService.selectId(param);
+
+		result.put("detail", detail);
 		result.put("message", "ok");
 
 		return result;

@@ -61,4 +61,12 @@ public interface LoginService {
 	 * @exception Exception
 	 */
 	public void insertSignUp(Map<String, Object> param) throws Exception;
+
+	/**
+	 * 아이디 찾기
+	 * @param Map
+	 * @return void
+	 * @exception Exception
+	 */
+	public Map<String, Object> selectId(Map<String, Object> param) throws Exception;
 }

@@ -157,6 +157,10 @@ footer { background:#fafafa; padding:15px 30px; text-align:center; font-size:13p
     margin-bottom:15px;
 }
 
+.menu-info-box .form-row-divide {
+    margin-bottom:15px;
+}
+
 .menu-info-box label {
     display:block;
     margin-bottom:6px;
@@ -214,6 +218,11 @@ footer { background:#fafafa; padding:15px 30px; text-align:center; font-size:13p
 /* form-row 재정의 */
 .menu-form-grid .form-row {
     display: flex;
+    flex-direction: column;
+}
+
+/* form-row 재정의 */
+.menu-form-grid .form-row-divide {
     flex-direction: column;
 }
 
@@ -418,6 +427,11 @@ thead th {
   text-align : center;
 }
 
+tr.left-align td,
+tr.left-align th {
+    text-align: left;
+}
+
 /* hover 허용 테이블만 */
 .table-hover tbody tr:hover,
 .table-hover tbody tr:hover td {
@@ -509,6 +523,9 @@ tbody tr td {
     gap: 16px 10px;
 }
 
+.search-row-right {
+    margin-left:auto;
+}
 
 /* 라벨 */
 .search-row label {
@@ -594,7 +611,7 @@ tbody tr td {
 	text-decoration: none;
 }
 
-table input {
+table input[type="text"] {
     height: 40px;
     padding: 0 12px;
     border-radius: 6px;
@@ -622,8 +639,10 @@ select {
 }
 
 .btn.blue { background:#3498db; color:#fff; }
+.btn.red { background:#e74c3c; color:#fff; }
 .btn.gray { background:#e5e7eb; color:#374151; }
 .btn.blue:hover { background:#2980b9; }
+.btn.red:hover { background:#c0392b; }
 .btn.gray:hover { background:#d1d5db; }
 
 /* ===== Header User Area ===== */
@@ -657,3 +676,39 @@ header .user-name {
     background: rgba(255,255,255,0.15);
     border-color: rgba(255,255,255,0.6);
 }
+
+/* td / th 왼쪽 정렬 */
+.form-table th,
+.form-table td {
+    text-align: left !important;
+    vertical-align: middle;
+}
+
+/* td 안 input / select 100% */
+.form-table td input[type="text"]{
+    width: 100%;
+}
+
+/* td / th 왼쪽 정렬 */
+.bbs-table th,
+.bbs-table td {
+    text-align: left !important;
+    vertical-align: middle;
+}
+
+/* td 안 input / select 100% */
+.bbs-table td input[type="text"]{
+    width: 13%;
+}
+
+/* 버튼 같이 있는 경우 줄 안 깨지게 */
+.form-table td {
+    box-sizing: border-box;
+}
+
+/* 우편번호 + 버튼 같은 케이스 정리 */
+.form-table td > button {
+    margin-left: 6px;
+    white-space: nowrap;
+}
+

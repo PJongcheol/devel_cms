@@ -103,10 +103,21 @@ public class LoginServiceImpl implements LoginService {
 	 * @return void
 	 * @exception Exception
 	 */
+	@Override
 	public void insertSignUp(Map<String, Object> param) throws Exception {
 		String pw = param.get("memberPw").toString();
 		param.put("memberPw", DigestUtils.sha256Hex(pw));
 		loginMapper.insertSignUp(param);
 	}
 
+	/**
+	 * 아이디 찾기
+	 * @param Map
+	 * @return void
+	 * @exception Exception
+	 */
+	@Override
+	public Map<String, Object> selectId(Map<String, Object> param) throws Exception {
+		return loginMapper.selectId(param);
+	}
 }

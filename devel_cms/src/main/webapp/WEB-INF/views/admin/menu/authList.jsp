@@ -155,11 +155,11 @@
 				// 동적 html
 				// 미등록 권한
 				for(var i=0; i<data[0].length; i++) {
-					html1 += "<tr><td><input type=\"checkbox\" id=\"raCheck_"+i+"\" value=\""+data[0][i].authGrpCd+"\" class=\"normal_check\"> "+data[0][i].authNm+" </td></tr>";
+					html1 += "<tr class=\"left-align\"><td><input type=\"checkbox\" id=\"raCheck_"+i+"\" value=\""+data[0][i].authGrpCd+"\" class=\"normal_check\"> "+data[0][i].authNm+" </td></tr>";
 				}
 				// 등록 권한
 				for(var i=0; i<data[1].length; i++) {
-					html2 += "<tr><td><input type=\"checkbox\" id=\"uraCheck_"+i+"\" value=\""+data[1][i].authGrpCd+"\" class=\"normal_check\"> "+data[1][i].authNm+" </td></tr>";
+					html2 += "<tr class=\"left-align\"><td><input type=\"checkbox\" id=\"uraCheck_"+i+"\" value=\""+data[1][i].authGrpCd+"\" class=\"normal_check\"> "+data[1][i].authNm+" </td></tr>";
 				}
 
 				if(html1 == "") {

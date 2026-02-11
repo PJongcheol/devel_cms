@@ -47,6 +47,16 @@ $(function () {
 
 		$(this).val(value);
 	});
+
+	// 숫자 자동 변환
+	$(".only_number").on("input", function(){
+		var value = $(this).val();
+
+		// 숫자만 허용
+		value = value.replace(/[^0-9]/g, "");
+
+		$(this).val(value);
+	});
 });
 
 // 이메일 형식 체크

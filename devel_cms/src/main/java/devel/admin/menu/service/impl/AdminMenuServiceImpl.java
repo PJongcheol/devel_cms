@@ -45,6 +45,16 @@ public class AdminMenuServiceImpl implements AdminMenuService{
 	}
 
 	/**
+	 * 게시물 목록 조회
+	 * @param Map
+	 * @return List
+	 * @exception Exception
+	 */
+	public List<Map<String, Object>> adminBbsList(Map<String, Object> param) throws Exception {
+		return adminMenuMapper.adminBbsList(param);
+	}
+
+	/**
 	 * 메뉴 정렬
 	 * @param List<Map<String, Object>>
 	 * @return List<Map<String, Object>>

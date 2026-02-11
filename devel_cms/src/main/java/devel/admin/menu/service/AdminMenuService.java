@@ -30,6 +30,14 @@ public interface AdminMenuService {
 	public List<Map<String, Object>> getMenuList(Map<String, Object> param) throws Exception;
 
 	/**
+	 * 게시물 목록 조회
+	 * @param Map
+	 * @return List
+	 * @exception Exception
+	 */
+	public List<Map<String, Object>> adminBbsList(Map<String, Object> param) throws Exception;
+
+	/**
 	 * 메뉴목록관리 저장
 	 * @param Map
 	 * @return void

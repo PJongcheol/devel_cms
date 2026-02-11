@@ -69,6 +69,10 @@ public class AdminMenuController extends BaseController {
 		String jsonString = mapper.writeValueAsString(jsonData);
 
 		model.addAttribute("jsonString", jsonString);
+
+		List<Map<String, Object>> bbsList = adminMenuService.adminBbsList(param);
+
+		model.addAttribute("bbsList", bbsList);
 		model.addAttribute("holder", param);
 
 		return adminLayout(model, "/WEB-INF/views/admin/menu/list");

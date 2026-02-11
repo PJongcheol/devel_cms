@@ -42,13 +42,15 @@
 
 	// 회원가입
 	function fn_signUp() {
-		$("#signUpForm").submit();
+		location.href = "/login/signUp.do";
+	}
+
+	// 아이디 찾기
+	function fn_searchId() {
+		location.href = "/login/searchId.do";
 	}
 </script>
 </head>
-<form name="signUpForm" id="signUpForm" method="post" action="/login/signUp.do">
-
-</form>
 <body class="dev-page">
 	<form name="loginForm" id="loginForm" method="post" action="/login/actionLogin.do">
 		<div class="dev-box">
@@ -65,7 +67,7 @@
 
 	            <button type="button" onclick="fn_login()" class="dev-btn">로그인</button>
 	            <button type="button" onclick="fn_signUp()" class="dev-btn-gray-50">회원가입</button>
-	            <a href="/login/idSearch.do" class="dev-btn-gray-50">아이디찾기</a>
+	            <button type="button" onclick="fn_searchId()" class="dev-btn-gray-50">아이디찾기</button>
 		    </div>
 		    <div class="dev-footer">
 		        © 2026 CMS Admin System

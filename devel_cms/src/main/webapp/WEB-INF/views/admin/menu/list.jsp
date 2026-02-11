@@ -38,9 +38,10 @@
 			$("#mngMenuForm #menuDepth").val(node.original.menuDepth);
 			$("#mngMenuForm #siteCode").val(node.original.siteCode);
 			$("#mngMenuForm #menuOrdr").val(node.original.menuOrder);
-			$("#mngMenuForm #menuType").prop("selected", true).val(node.original.menuType);
+			$("#mngMenuForm #menuType").prop("selected", true).val(node.original.menuType).trigger("change");
 			$("#mngMenuForm #useYn").prop("selected", true).val(node.original.useYn);
 			$("#mngMenuForm #siteCode").val(siteCode);
+			$("#mngMenuForm #bbsSeq").val(node.original.bbsSeq);
 		});
 
 		// 하위 메뉴 추가
@@ -193,6 +194,20 @@
 			$("#siteCode").val(siteCode);
 			$("#mngMenuForm").submit();
 		});
+
+		// 메뉴 타입 변경 시
+		$("#mngMenuForm #menuType").change(function(){
+			var menuType = $("#menuType").val();
+
+			if(menuType == "brd") {
+				$(this).css("width", "49%");
+				$("#bbsSeq").show();
+			} else {
+				$(this).css("width", "100%");
+				$("#bbsSeq").hide();
+			}
+
+		});
 	});
 </script>
 </head>
@@ -257,12 +272,18 @@
 				                <input type="text" id="menuIcon" name="menuIcon">
 				            </div>
 
-				            <div class="form-row">
+				            <div class="form-row-divide">
 				                <label>메뉴종류</label>
 				                <select id="menuType" name="menuType">
 				                	<option value="">선택</option>
 				                	<option value="pgm">프로그램</option>
 				                	<option value="brd">게시판</option>
+				                </select>
+				                <select id="bbsSeq" name="bbsSeq" style="display:none; width:49%">
+				                	<option value="">선택</option>
+				                	<c:forEach var="bbs" items="${bbsList }">
+				                		<option value="${bbs.bbsSeq }">${bbs.bbsNm }</option>
+				                	</c:forEach>
 				                </select>
 				            </div>
 

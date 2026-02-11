@@ -10,6 +10,9 @@ public interface AdminMenuMapper {
 	// 메뉴목록 리스트 조회
 	public List<Map<String, Object>> getMenuList(Map<String, Object> param);
 
+	// 게시물 목록 조회
+	public List<Map<String, Object>> adminBbsList(Map<String, Object> param);
+
 	// 메뉴목록관리 저장
 	public void insertMenu(Map<String, Object> param);
 
