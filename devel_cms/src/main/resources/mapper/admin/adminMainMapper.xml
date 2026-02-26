@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="devel.admin.main.mapper.AdminMainMapper">
+	<!-- 팝업 목록 조회 -->
+	<select id="selectPopupList" resultType="Map">
+		/* AdminMainMapper.selectPopupList */
+		SELECT
+			 A.POPUP_SEQ									AS popupSeq
+			,A.POPUP_SJ										AS popupSj
+			,A.POPUP_URL									AS popupUrl
+			,A.ATCHFILENO									AS atchfileno
+			,A.POPUP_WIDTH_LC								AS popupWidthLc
+			,A.POPUP_HEIGHT_LC								AS popupHeightLc
+			,A.POPUP_WIDTH									AS popupWidth
+			,A.POPUP_HEIGHT									AS popupHeight
+			,A.BGNDE_DE										AS bgndeDe
+			,A.END_DE										AS endDe
+			,A.POPUP_ORDR									AS popupOrdr
+			,A.POPUP_CN										AS popupCn
+			,A.POPUP_TY										AS popupTy
+			,A.POPUP_SE										AS popupSe
+			,B.SVFILENM										AS svfilenm
+		FROM
+			TB_MAIN_POPUP A
+		LEFT JOIN
+			TB_FILE_INFO B
+		ON
+			A.ATCHFILENO = B.ATCHFILENO
+		WHERE
+			A.SITE_CODE = 'admin'
+		AND
+			A.USE_YN = 'Y'
+		AND
+			DATE_FORMAT(now(), '%Y-%m-%d') BETWEEN A.BGNDE_DE AND A.END_DE
+	</select>
+
+	<!-- 팝업 조회 -->
+	<select id="selectPopup" parameterType="Map" resultType="Map">
+		/* AdminMainMapper.selectPopup */
+		SELECT
+			 A.POPUP_SEQ									AS popupSeq
+			,A.POPUP_SJ										AS popupSj
+			,A.POPUP_URL									AS popupUrl
+			,A.ATCHFILENO									AS atchfileno
+			,A.POPUP_WIDTH_LC								AS popupWidthLc
+			,A.POPUP_HEIGHT_LC								AS popupHeightLc
+			,A.POPUP_WIDTH									AS popupWidth
+			,A.POPUP_HEIGHT									AS popupHeight
+			,A.BGNDE_DE										AS bgndeDe
+			,A.END_DE										AS endDe
+			,A.POPUP_ORDR									AS popupOrdr
+			,A.POPUP_CN										AS popupCn
+			,A.POPUP_TY										AS popupTy
+			,A.POPUP_SE										AS popupSe
+			,B.SVFILENM										AS svfilenm
+		FROM
+			TB_MAIN_POPUP A
+		LEFT JOIN
+			TB_FILE_INFO B
+		ON
+			A.ATCHFILENO = B.ATCHFILENO
+		WHERE
+			A.POPUP_SEQ = #{popupSeq}
+	</select>
+</mapper>

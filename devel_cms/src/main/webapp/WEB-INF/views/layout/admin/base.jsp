@@ -15,8 +15,35 @@
 	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
 	<script src="<c:url value='/js/devel.js'/>"></script>
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
 </head>
+<script>
+	var editor;
+
+	$(document).ready(function(){
+		var editorElement = document.querySelector('.commonCn');
+
+		if(editorElement) {
+			ClassicEditor.create(document.querySelector('.commonCn'), {
+		        removePlugins: ['MediaEmbed'],
+		    	ckfinder: {
+		            uploadUrl: '/etc/imageUpload.do'
+		        }
+		    })
+		    .then( newEditor => {
+				editor = newEditor;
+		    })
+		    .catch(error => {
+		        console.error(error);
+		    });
+		}
+	});
+</script>
 <body>
+	<form id="downloadFileForm" name="downloadFileForm" method="post" action="/etc/downloadFile.do">
+		<input type="hidden" id="atchfileno" name="atchfileno"/>
+		<input type="hidden" id="fileord" name="fileord"/>
+	</form>
 	<jsp:include page="/WEB-INF/views/layout/admin/header.jsp"/>
 
 	<div class="container">

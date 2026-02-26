@@ -1,15 +1,19 @@
 package devel.admin.main;
 
+import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import devel.admin.main.service.AdminMainService;
 import devel.cmmn.base.BaseController;
-import devel.cmmn.menu.service.MenuService;
 import jakarta.servlet.http.HttpSession;
 
 /**
@@ -32,12 +36,15 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 @RequestMapping("/admin/main")
 public class AdminMainController extends BaseController{
+	@Autowired
+	AdminMainService adminMainService;
+
+	@Value("${file.upload.url}")
+	private String uploadUrl;
+
 	/**
      * 메인 대시보드
      * @Method : index
-     * @param request
-     * @param response
-     * @param throws
      * @throws Exception
      * @return : String
      */
@@ -45,7 +52,31 @@ public class AdminMainController extends BaseController{
 	public String loginRedirect(@RequestParam Map<String, Object> param
 			, ModelMap model, HttpSession session) throws Exception {
 
+		// 팝업 목록 조회
+		List<Map<String, Object>> popupList = adminMainService.selectPopupList();
+		model.addAttribute("popupList", popupList);
+		model.addAttribute("uploadUrl", uploadUrl);
+
 		return adminLayout(model, "/WEB-INF/views/admin/main/index");
+
+	}
+
+	/**
+     * 팝업 호출
+     * @Method : windowPopup
+     * @throws Exception
+     * @return : String
+     */
+	@GetMapping(value ="/windowPopup.do")
+	public String windowPopup(@RequestParam Map<String, Object> param
+			, ModelMap model, HttpSession session) throws Exception {
+
+		// 팝업 조회
+		Map<String, Object> popup = adminMainService.selectPopup(param);
+		model.addAttribute("popup", popup);
+		model.addAttribute("uploadUrl", uploadUrl);
+
+		return "/admin/main/popup/popup";
 
 	}
 }

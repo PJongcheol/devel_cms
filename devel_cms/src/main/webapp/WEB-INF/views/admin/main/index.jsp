@@ -7,6 +7,45 @@
 <meta charset="UTF-8">
 <title>대시보드</title>
 </head>
+<script type="text/javascript">
+	$(document).ready(function(){
+		<c:forEach var="popup" items="${popupList}">
+			if("${popup.popupSe}" == "P") { // 윈도우 팝업
+				if(getCookie("popup_${popup.popupSeq}") != "done") {
+					window.open(
+						 '/admin/main/windowPopup.do?popupSeq=${popup.popupSeq}'
+						,'_blank'
+						,'toolbar=yes,scrollbars=yes,resizable=yes,top=${popup.popupHeightLc},left=${popup.popupWidthLc},width=${popup.popupWidth},height=${popup.popupHeight}'
+					);
+				};
+			} else { // 레이어팝업
+				if("${popup.popupTy}" == "L")  { // 이미지 기반
+					createLayerPop(
+						 '${popup.popupSeq}'
+						,'${popup.popupSj}'
+						,'${uploadUrl}popup/${popup.svfilenm}'
+						,'${popup.popupWidth}'
+						,'${popup.popupHeight}'
+						,'${popup.popupWidthLc}'
+						,'${popup.popupHeightLc}'
+						,'image'
+					);
+				} else { // 에디터 기반
+					createLayerPop(
+						 '${popup.popupSeq}'
+						,'${popup.popupSj}'
+						,'${popup.popupCn}'
+						,'${popup.popupWidth}'
+						,'${popup.popupHeight}'
+						,'${popup.popupWidthLc}'
+						,'${popup.popupHeightLc}'
+						,'editor'
+					);
+				}
+			}
+		</c:forEach>
+	});
+</script>
 <body>
 	<main class="main">
         <div class="cards">

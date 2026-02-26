@@ -94,3 +94,167 @@ function fn_juso() {
         }
     }).open();
 }
+
+// 파일 다운로드
+function fn_fileDownload(atchfileno, fileord) {
+	$("#downloadFileForm #atchfileno").val(atchfileno)
+	$("#downloadFileForm #fileord").val(fileord)
+	$("#downloadFileForm").submit();
+}
+
+// 파일 삭제
+function fn_fileDel(atchfileno, fileord) {
+	var html = "";
+
+	if(confirm("해당 파일을 삭제하시겠습니까?")) {
+		$.ajax({
+		  url: "/etc/deleteFile.do",
+		  type: "POST",
+		  data: {
+			   atchfileno : atchfileno
+			  ,fileord : fileord
+		  },
+		  success: function(data) {
+			  if(data.message == "ok") {
+				  alert("정상적으로 처리되었습니다.");
+
+				  $(this).parent().remove();
+
+				  var len = $("#fileDiv .file-item").length;
+
+				  if(len == 0) {
+					html += "<input type=\"file\" id=\"file\" name=\"files\">";
+					$("#fileDiv").append(html);
+				  }
+			  }
+		  },
+		  error: function(xhr, status, error){
+			  console.log(xhr + ":" + status + ":" + error);
+			  alert("처리 중 오류가 발생했습니다.");
+			  return false;
+		  }
+		});
+	}
+}
+
+function getCookie(name) {
+    var cookies = document.cookie.split(';');
+    for (var c of cookies) {
+        const [key, value] = c.trim().split('=');
+        if (key === name) return value;
+    }
+    return null;
+}
+
+function setCookie(name, value, days) {
+    const date = new Date();
+    date.setDate(date.getDate() + days);
+    document.cookie =
+        name + "=" + value +
+        ";expires=" + date.toUTCString() +
+        ";path=/";
+}
+
+// 레이어 팝업
+function createLayerPop(seq, sj, content, width, height, widthLc, heightLc, mode) {
+	// 쿠키에 등록 되어있는지 체크
+	if(getCookie("popup_" + seq) == "done") {
+		return;
+	}
+
+	var popup = document.createElement("div");
+				popup.id = "popup_"+seq;
+				popup.className = "layer-popup";
+			    popup.style.width = width + "px";
+			    popup.style.height = height + "px";
+			    popup.style.left = widthLc + "px";
+			    popup.style.top = heightLc + "px";
+				popup.style.position = "fixed";
+				popup.style.zIndex = "9999";
+				popup.style.display = "flex";
+				popup.style.flexDirection = "column";
+
+	if(mode == "image") { // 이미지 링크형
+		popup.innerHTML = `
+		    <div class="layer-header" style="
+		        padding:10px 15px;
+		        background:#1f2c3d;
+		        color:#fff;
+		        font-weight:600;
+		        cursor:move;
+		        text-align:center;">
+		        ${sj}
+		    </div>
+
+		    <div class="layer-body" style="
+		        flex:1;
+		        padding:20px;
+		        overflow:auto;">
+		        <img src="${content}" style="width:100%">
+		    </div>
+
+		    <div class="layer-footer" style="
+		        padding:10px 15px;
+		        border-top:1px solid #eee;
+		        display:flex;
+		        justify-content:space-between;
+		        align-items:center;
+		        background:#fafafa;">
+		        <label style="
+		            display:flex;
+		            align-items:center;
+		            gap:6px;
+		            font-size:13px;
+		            cursor:pointer;">
+		            <input type="checkbox"
+		                   id="weekClose_${seq}"
+		                   style="margin:0;">
+		            1주일간 열지 않음
+		        </label>
+
+		        <button onclick="fn_layerClose('${seq}')"
+		            style="
+		                padding:6px 12px;
+		                border-radius:6px;
+		                border:none;
+		                background:#3498db;
+		                color:#fff;
+		                cursor:pointer;">
+		            닫기
+		        </button>
+		    </div>
+		`;
+		  document.body.appendChild(popup);
+	} else { // 에디터형
+		popup.innerHTML = `
+		        <div class="layer-header" style="padding:10px 15px;background:#1f2c3d;color:#fff;font-weight:600;cursor:move;text-align:center;">${sj}</div>
+
+				<div class="layer-body" style="flex:1;padding:20px;overflow:auto;">${content}</div>
+
+		        <div class="layer-footer" style="padding:10px 15px;border-top:1px solid #eee;
+		             display:flex;justify-content:space-between;align-items:center;background:#fafafa;">
+		            <label style="font-size:13px;">
+		                <input type="checkbox" id="weekClose_${seq}" class="close">
+		                1주일간 열지 않음
+		            </label>
+		            <button class="btn-close"
+						onclick="fn_layerClose('${seq}')"
+		                style="padding:6px 12px;border-radius:6px;border:none;
+		                background:#3498db;color:#fff;cursor:pointer;">
+		                닫기
+		            </button>
+		        </div>
+		    `;
+		  document.body.appendChild(popup);
+	}
+}
+
+// 레이어 닫기
+function fn_layerClose(seq) {
+	// 1주일간 열지 않음 체크 시 쿠키 등록
+	if($("#weekClose_"+seq).is(":checked")) {
+		setCookie("popup_"+seq, "done", 7);
+	}
+
+	$("#popup_"+seq).remove();
+}

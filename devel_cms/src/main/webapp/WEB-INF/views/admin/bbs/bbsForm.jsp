@@ -158,7 +158,7 @@
 				  success: function(data) {
 					  if(data.message == "ok") {
 						  alert("정상적으로 처리되었습니다.");
-						  fn_bank();
+						  fn_back();
 					  }
 				  },
 				  error: function(xhr, status, error){
@@ -184,7 +184,7 @@
 				  success: function(data) {
 					  if(data.message == "ok") {
 						  alert("정상적으로 처리되었습니다.");
-						  fn_bank();
+						  fn_back();
 					  }
 				  },
 				  error: function(xhr, status, error){
@@ -198,7 +198,7 @@
 	});
 
 	// 목록
-	function fn_bank() {
+	function fn_back() {
 		$("#adminBbsForm").submit();
 	}
 
