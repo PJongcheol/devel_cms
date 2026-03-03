@@ -366,3 +366,19 @@ th {
 	font-size: 14px;
 	text-align: center;
 }
+/* SNS 로그인 */
+.sns-wrap {
+    display: flex;
+    gap: 5px;
+}
+
+.sns-btn {
+    flex: 1;
+}
+
+.sns-btn img {
+    width: 100%;
+    height: 45px;
+    object-fit: contain;
+    cursor: pointer;
+}

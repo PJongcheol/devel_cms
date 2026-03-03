@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/views/common/taglib.jsp" %>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
@@ -24,9 +25,11 @@
                 해당 페이지는 cms 진입 전 메인보드 페이지 입니다.</br>
                 Tel. 010-8983-2348
             </p>
-            <p class="copyright">
-                <a href="javascript:void(0)" onclick="fn_mng()" class="footer-admin-btn">SYSTEM</a>
-            </p>
+            <c:if test="${sessionScope.LoginVO.getMasterCode() eq '9' or sessionScope.LoginVO.getMasterCode() eq '10'}">
+	            <p class="copyright">
+	                <a href="javascript:void(0)" onclick="fn_mng()" class="footer-admin-btn">SYSTEM</a>
+	            </p>
+            </c:if>
         </div>
     </div>
 </footer>

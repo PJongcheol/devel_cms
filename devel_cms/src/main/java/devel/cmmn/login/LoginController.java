@@ -134,6 +134,10 @@ public class LoginController {
 			return "redirect:/login.do";
 		}
 
+		// 최종 로그인 일시를 업데이트 시켜준다.
+		String memberId = loginVo.getMemberId();
+		loginService.updateLastLogin(memberId);
+
 		// session에 저장
 		req.getSession().setAttribute("LoginVO", loginVo);
 

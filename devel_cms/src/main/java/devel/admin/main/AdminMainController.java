@@ -53,9 +53,17 @@ public class AdminMainController extends BaseController{
 			, ModelMap model, HttpSession session) throws Exception {
 
 		// 팝업 목록 조회
-		List<Map<String, Object>> popupList = adminMainService.selectPopupList();
-		model.addAttribute("popupList", popupList);
+		model.addAttribute("popupList", adminMainService.selectPopupList());
 		model.addAttribute("uploadUrl", uploadUrl);
+
+		// 대시보드 상단 조회
+		model.addAttribute("top", adminMainService.selectIndexTop());
+
+		// 대시보드 회원목록 조회
+		model.addAttribute("userList", adminMainService.selectIndexMemberList());
+
+		// 대시보드 공지사항 조회
+//		model.addAttribute("popupList", adminMainService.selectPopupList());
 
 		return adminLayout(model, "/WEB-INF/views/admin/main/index");
 

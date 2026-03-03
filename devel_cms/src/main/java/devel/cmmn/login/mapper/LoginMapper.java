@@ -17,6 +17,9 @@ public interface LoginMapper {
 	// 로그인 처리
 	public LoginVO actionLogin(Map<String, Object> param);
 
+	// 최종로그인 일시 처리
+	public void updateLastLogin(String id);
+
 	// 로그인 이력 저장
 	public void insertLoginHis(Map<String, Object> param);
 
@@ -31,4 +34,13 @@ public interface LoginMapper {
 
 	// 아이디 찾기
 	public Map<String, Object> selectId(Map<String, Object> param);
+
+	// SNS 아이디 조회
+	public LoginVO selectSnsMember(String id) throws Exception;
+
+	// SNS 아이디 중복 조회
+	public int selectSnsIdCount(String id) throws Exception;
+
+	// SNS 아이디 저장
+	public void insertSnsMember(Map<String, Object> param);
 }

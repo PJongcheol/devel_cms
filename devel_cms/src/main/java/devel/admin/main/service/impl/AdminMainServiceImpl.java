@@ -51,4 +51,26 @@ public class AdminMainServiceImpl implements AdminMainService{
 	public Map<String, Object> selectPopup(Map<String, Object> param) throws Exception {
 		return adminMainMapper.selectPopup(param);
 	}
+
+	/**
+	 * 대시보드 상단 조회
+	 * @param Map
+	 * @return Map
+	 * @exception Exception
+	 */
+	@Override
+	public Map<String, Object> selectIndexTop() throws Exception {
+		return adminMainMapper.selectIndexTop();
+	}
+
+	/**
+	 * 대시보드 회원 목록 조회
+	 * @param Map
+	 * @return List
+	 * @exception Exception
+	 */
+	@Override
+	public List<Map<String, Object>> selectIndexMemberList() throws Exception {
+		return adminMainMapper.selectIndexMemberList();
+	}
 }

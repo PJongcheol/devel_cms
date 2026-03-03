@@ -13,4 +13,9 @@ public interface AdminMainMapper {
 	// 팝업 조회
 	public Map<String, Object> selectPopup(Map<String, Object> param);
 
+	// 대시보드 상단 조회
+	public Map<String, Object> selectIndexTop();
+
+	// 대시보드 회원 목록 조회
+	public List<Map<String, Object>> selectIndexMemberList();
 }

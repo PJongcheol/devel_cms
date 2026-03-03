@@ -169,7 +169,8 @@
 			  data: formData,
 			  success: function(data) {
 				  if(data.message == "ok") {
-					  alert("정상적으로 처리되었습니다.\n관리자의 승인 후 이용 가능합니다.");
+// 					  alert("정상적으로 처리되었습니다.\n관리자의 승인 후 이용 가능합니다.");
+					  alert("정상적으로 처리되었습니다.");
 					  location.href = "/login.do";
 				  }
 			  },
@@ -230,7 +231,7 @@
 
 	            <div class="agree-box">
 				    <label>
-				        <input type="checkbox" id="agreeYn" name="agreeYn">
+				        <input type="checkbox" id="agreeYn" name="agreeYn" value="Y">
 				        <span>
 				            개인정보 수집 및 이용에 동의합니다.
 				        </span>

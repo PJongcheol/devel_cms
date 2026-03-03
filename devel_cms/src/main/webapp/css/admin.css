@@ -751,3 +751,79 @@ header .user-name {
     box-shadow: 0 15px 40px rgba(0,0,0,0.2);
     z-index: 9999;
 }
+
+/* ===============================
+   Dashboard - 2 Column List
+   =============================== */
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+    margin-top: 30px;
+}
+
+/* 공통 박스 */
+.dashboard-box {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px 22px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+}
+
+/* 헤더 */
+.dashboard-box-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.dashboard-box-header h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* 더보기 */
+.dashboard-more {
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: 1px solid #d1d5db;
+    background: #f9fafb;
+    font-size: 12px;
+    font-weight: 600;
+    color: #374151;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.dashboard-more:hover {
+    background: #ecf4fb;
+    border-color: #cfe3f7;
+    color: #2c3e50;
+}
+
+/* 고정 높이 + 스크롤 */
+.dashboard-box-body {
+    flex: 1;
+    max-height: 260px;
+    min-height: 260px;
+    overflow-y: auto;
+}
+
+/* 대시보드 테이블은 조금 더 컴팩트하게 */
+.dashboard-box table th,
+.dashboard-box table td {
+    padding: 8px 10px;
+    font-size: 13px;
+}
+
+/* 모바일 대응 */
+@media(max-width: 1024px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}

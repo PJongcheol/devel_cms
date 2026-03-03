@@ -31,7 +31,7 @@ import jakarta.servlet.http.HttpSession;
  * @Class Name   : EtcController
    @Description  :공통 Controller
  * @author  : PJC
- * @date    : 2026. 2. 6
+ * @date    : 2026. 2. 13
  * @desc    :
  * @version : 1.0
  * @see

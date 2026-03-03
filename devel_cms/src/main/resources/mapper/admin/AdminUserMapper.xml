@@ -44,6 +44,7 @@
 			,MEMBER_ADDR 								AS memberAddr
 			,MEMBER_ADDR_DETL 							AS memberAddrDetl
 			,CONFM_YN 									AS confmYn
+			,JOIN_DE									AS joinDe
 			,CONFM_ID 									AS confmId
 			,CONFM_DT 									AS confmDt
 			,PASSWORD_UPD_DT 							AS passwordUpdDt
@@ -92,6 +93,7 @@
 			,MEMBER_ADDR 								AS memberAddr
 			,MEMBER_ADDR_DETL 							AS memberAddrDetl
 			,CONFM_YN 									AS confmYn
+			,JOIN_DE									AS joinDe
 			,CONFM_ID 									AS confmId
 			,CONFM_DT 									AS confmDt
 			,PASSWORD_UPD_DT 							AS passwordUpdDt

@@ -12,7 +12,6 @@
 	    <div class="hero-inner">
 	        <h1>CMS Integrated Management Portal Main Board</h1>
 	        <p>콘텐츠 · 사용자 · 시스템을 하나의 플랫폼에서 관리합니다.</p>
-	        <c:out value="${sessionScope.LoginVO.getMemberId()}"/>
 	    </div>
 	</section>
 </body>

@@ -41,10 +41,18 @@ public interface LoginService {
 	/**
 	 * 로그인 처리
 	 * @param Map
-	 * @return String
+	 * @return LoginVO
 	 * @exception Exception
 	 */
 	public LoginVO actionLogin(Map<String, Object> param) throws Exception;
+
+	/**
+	 * 최종로그인 일시 처리
+	 * @param String
+	 * @return void
+	 * @exception Exception
+	 */
+	public void updateLastLogin(String id) throws Exception;
 
 	/**
 	 * 아이디 중복체크
@@ -65,8 +73,34 @@ public interface LoginService {
 	/**
 	 * 아이디 찾기
 	 * @param Map
-	 * @return void
+	 * @return Map
 	 * @exception Exception
 	 */
 	public Map<String, Object> selectId(Map<String, Object> param) throws Exception;
+
+	/**
+	 * SNS 아이디 조회
+	 * @param String
+	 * @return LoginVO
+	 * @exception Exception
+	 */
+	public LoginVO selectSnsMember(String id) throws Exception;
+
+	/**
+	 * SNS 아이디 중복 조회
+	 * @param String
+	 * @return int
+	 * @exception Exception
+	 */
+	public int selectSnsIdCount(String id) throws Exception;
+
+	/**
+	 * SNS 아이디 저장
+	 * @param Map
+	 * @return void
+	 * @exception Exception
+	 */
+	public void insertSnsMember(Map<String, Object> param) throws Exception;
+
+
 }

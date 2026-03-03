@@ -27,9 +27,10 @@ public class WebConfig implements WebMvcConfigurer {
         		.excludePathPatterns(
         			"/login.do",
         			"/login/**",
+        			"/api/social/login/**",
         			"/css/**",
         			"/js/**",
-        			"/image/**",
+        			"/images/**",
         			"/uploads/**",
         			"/error"
         		).order(1);
@@ -38,9 +39,10 @@ public class WebConfig implements WebMvcConfigurer {
 		        .excludePathPatterns(
 	        		"/login.do",
         			"/login/**",
+        			"/api/social/login/**",
         			"/css/**",
         			"/js/**",
-        			"/image/**",
+        			"/images/**",
         			"/uploads/**",
         			"/error"
 		        )

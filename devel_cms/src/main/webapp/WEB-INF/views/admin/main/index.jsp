@@ -49,26 +49,111 @@
 <body>
 	<main class="main">
         <div class="cards">
-            <div class="card blue"><h3>총 회원</h3><p>1,234</p></div>
-            <div class="card green"><h3>오늘 방문</h3><p>567</p></div>
-            <div class="card orange"><h3>게시글</h3><p>89</p></div>
-            <div class="card purple"><h3>댓글</h3><p>456</p></div>
+            <div class="card blue"><h3>오늘 방문</h3><p><fmt:formatNumber value="${top.logCnt }" pattern="#,###" /></p></div>
+            <div class="card green"><h3>총 회원</h3><p><fmt:formatNumber value="${top.userCnt }" pattern="#,###" /></p></div>
+            <div class="card orange"><h3>총 게시물</h3><p><fmt:formatNumber value="${top.boardCnt }" pattern="#,###" /></p></div>
+            <div class="card purple"><h3>총 팝업</h3><p><fmt:formatNumber value="${top.popupCnt }" pattern="#,###" /></p></div>
         </div>
 
-        <div class="section">
-            <h3>회원 목록</h3>
-            <input type="text" id="datepicker" placeholder="가입일 선택">
-            <table>
-                <thead>
-                    <tr><th><input type="checkbox"></th><th>회원 ID</th><th>이름</th><th>가입일</th><th>상태</th></tr>
-                </thead>
-                <tbody>
-                    <tr><td><input type="checkbox"></td><td>HelloWorld</td><td>홍길동</td><td>2026-01-01</td><td>활성</td></tr>
-                    <tr><td><input type="checkbox"></td><td>user02</td><td>김철수</td><td>2026-01-05</td><td>활성</td></tr>
-                    <tr><td><input type="checkbox"></td><td>user03</td><td>이영희</td><td>2026-01-10</td><td>휴면</td></tr>
-                </tbody>
-            </table>
-        </div>
+        <div class="dashboard-grid">
+		    <!-- 회원 목록 -->
+		    <div class="dashboard-box">
+		        <div class="dashboard-box-header">
+		            <h3>회원 목록</h3>
+		            <a href="javascript:void(0)" onclick="fn_goMenu('/admin/user/userList.do', '11', '10')" class="dashboard-more">더보기</a>
+		        </div>
+
+		        <div class="dashboard-box-body">
+		            <table>
+		            	<colgroup>
+				        	<col style="width:25%">
+				        	<col style="width:25%">
+				        	<col style="width:20">
+				        	<col style="width:20%">
+				        	<col style="width:10%">
+				        </colgroup>
+		                <thead>
+		                    <tr>
+		                        <th>회원 ID</th>
+		                        <th>이름</th>
+		                        <th>권한</th>
+		                        <th>가입일</th>
+		                        <th>상태</th>
+		                    </tr>
+		                </thead>
+		                <tbody>
+		                    <c:choose>
+		                        <c:when test="${!empty userList}">
+		                            <c:forEach var="user" items="${userList}" begin="0" end="4">
+		                                <tr>
+		                                    <td>
+		                                        <c:out value="${fn:length(user.memberId) > 13 ? fn:substring(user.memberId, 0, 13).concat('...') : user.memberId }"/>
+		                                    </td>
+		                                    <td><c:out value="${user.memberNm}"/></td>
+		                                    <td>
+		                                        <c:choose>
+		                                            <c:when test="${user.masterCode eq '10'}">시스템관리자</c:when>
+		                                            <c:when test="${user.masterCode eq '9'}">관리자</c:when>
+		                                            <c:when test="${user.masterCode eq '1'}">일반사용자</c:when>
+		                                        </c:choose>
+		                                    </td>
+		                                    <td></td>
+		                                    <td class="${user.useYn eq 'Y' ? 'text-color-blue' : 'text-color-red'}"><c:out value="${user.useYn eq 'Y' ? '활성' : '비활성'}"/></td>
+		                                </tr>
+		                            </c:forEach>
+		                        </c:when>
+		                        <c:otherwise>
+		                            <tr>
+		                                <td colspan="5">조회된 데이터가 없습니다.</td>
+		                            </tr>
+		                        </c:otherwise>
+		                    </c:choose>
+		                </tbody>
+		            </table>
+		        </div>
+		    </div>
+
+
+		    <!-- 공지사항 -->
+		    <div class="dashboard-box">
+		        <div class="dashboard-box-header">
+		            <h3>공지사항</h3>
+		            <a href="javascript:void(0)" onclick="fn_goMenu('/admin/user/userList.do', '11', '10')" class="dashboard-more">더보기</a>
+		        </div>
+
+		        <div class="dashboard-box-body">
+		            <table>
+		                <thead>
+		                    <tr>
+		                        <th>제목</th>
+		                        <th>등록일</th>
+		                    </tr>
+		                </thead>
+		                <tbody>
+		                    <c:choose>
+		                        <c:when test="${!empty noticeList}">
+		                            <c:forEach var="notice" items="${noticeList}" begin="0" end="4">
+		                                <tr>
+		                                    <td class="left-align">
+		                                        <a href="/admin/notice/detail.do?seq=${notice.seq}" class="a-decoration-non">
+		                                            <c:out value="${notice.title}"/>
+		                                        </a>
+		                                    </td>
+		                                    <td><c:out value="${notice.regDt}"/></td>
+		                                </tr>
+		                            </c:forEach>
+		                        </c:when>
+		                        <c:otherwise>
+		                            <tr>
+		                                <td colspan="2">조회된 데이터가 없습니다.</td>
+		                            </tr>
+		                        </c:otherwise>
+		                    </c:choose>
+		                </tbody>
+		            </table>
+		        </div>
+		    </div>
+		</div>
     </main>
 </body>
 </html>

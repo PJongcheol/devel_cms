@@ -69,7 +69,7 @@ public class LoginServiceImpl implements LoginService {
 	/**
 	 * 로그인 처리
 	 * @param Map
-	 * @return String
+	 * @return LoginVO
 	 * @exception Exception
 	 */
 	@Override
@@ -98,6 +98,17 @@ public class LoginServiceImpl implements LoginService {
 	}
 
 	/**
+	 * 최종로그인 일시 처리
+	 * @param String
+	 * @return void
+	 * @exception Exception
+	 */
+	@Override
+	public void updateLastLogin(String id) throws Exception {
+		loginMapper.updateLastLogin(id);
+	}
+
+	/**
 	 * 회원 등록
 	 * @param Map
 	 * @return void
@@ -119,5 +130,40 @@ public class LoginServiceImpl implements LoginService {
 	@Override
 	public Map<String, Object> selectId(Map<String, Object> param) throws Exception {
 		return loginMapper.selectId(param);
+	}
+
+	/**
+	 * SNS 아이디 조회
+	 * @param String
+	 * @return LoginVO
+	 * @exception Exception
+	 */
+	@Override
+	public LoginVO selectSnsMember(String id) throws Exception {
+		return loginMapper.selectSnsMember(id);
+	}
+
+	/**
+	 * SNS 아이디 중복 조회
+	 * @param String
+	 * @return int
+	 * @exception Exception
+	 */
+	@Override
+	public int selectSnsIdCount(String id) throws Exception {
+		return loginMapper.selectSnsIdCount(id);
+	}
+
+	/**
+	 * SNS 아이디 저장
+	 * @param Map
+	 * @return void
+	 * @exception Exception
+	 */
+	@Override
+	public void insertSnsMember(Map<String, Object> param) throws Exception {
+		String snsId = param.get("snsId").toString();
+		param.put("memberPw", DigestUtils.sha256Hex(snsId));
+		loginMapper.insertSnsMember(param);
 	}
 }

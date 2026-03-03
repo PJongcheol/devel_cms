@@ -29,27 +29,39 @@
 	<select id="actionLogin" parameterType="Map" resultType="LoginVO">
 		/* LoginMapper.actionLogin */
 		SELECT
-			 A.MEMBER_ID		AS memberId
-			,A.AUTH_GRP_CD		AS authGrpCd
-			,A.MEMBER_NM		AS memberNm
-			,A.MASTER_CODE		AS masterCode
-			,A.MEMBER_EMAIL		AS memberEmail
-			,A.MEMBER_BRTHDY	AS memberBrthdy
-			,A.MEMBER_PHONE		AS memberPhone
-			,A.MEMBER_POST		AS memberPost
-			,A.MEMBER_ADDR		AS memberAddr
-			,A.MEMBER_ADDR_DETL	AS memberAddrDetl
-			,DATE_FORMAT(A.LAST_LOGIN_DT, '%Y%m%d') AS lastLoginDt
-			,A.FAIL_CNT			AS failCnt
+			 MEMBER_ID								AS memberId
+			,AUTH_GRP_CD							AS authGrpCd
+			,MEMBER_NM								AS memberNm
+			,MASTER_CODE							AS masterCode
+			,MEMBER_EMAIL							AS memberEmail
+			,MEMBER_BRTHDY							AS memberBrthdy
+			,MEMBER_PHONE							AS memberPhone
+			,MEMBER_POST							AS memberPost
+			,MEMBER_ADDR							AS memberAddr
+			,MEMBER_ADDR_DETL						AS memberAddrDetl
+			,DATE_FORMAT(LAST_LOGIN_DT, '%Y%m%d') 	AS lastLoginDt
+			,FAIL_CNT								AS failCnt
 	    FROM
-	    	TB_USER_INFO A
+	    	TB_USER_INFO
 	 	WHERE
-	 		A.MEMBER_ID = #{memberId}
+	 		MEMBER_ID = #{memberId}
 	    AND
-	    	A.MEMBER_PW = #{memberPw}
+	    	MEMBER_PW = #{memberPw}
 	   	AND
-	   		A.USE_YN = 'Y'
+	   		USE_YN = 'Y'
 	</select>
+
+	<!-- 최종로그인 일시 처리 -->
+	<update id="updateLastLogin" parameterType="String">
+		/* LoginMapper.updateLastLogin */
+		UPDATE
+			TB_USER_INFO
+		SET
+			LAST_LOGIN_DT = now()
+		WHERE
+			MEMBER_ID = #{value}
+	</update>
+
 
 	<!-- 로그인 이력 저장 -->
 	<insert id="insertLoginHis"  parameterType="Map">
@@ -92,8 +104,10 @@
 		/* LoginMapper.insertSignUp */
 		INSERT INTO TB_USER_INFO (
 			 MEMBER_ID
+			,AUTH_GRP_CD
 			,MEMBER_NM
 			,MEMBER_PW
+			,MASTER_CODE
 			,MEMBER_EMAIL
 			,MEMBER_BRTHDY
 			,MEMBER_PHONE
@@ -101,10 +115,17 @@
 			,MEMBER_ADDR
 			,MEMBER_ADDR_DETL
 			,AGREE_YN
+			,CONFM_YN
+			,JOIN_DE
+			,CONFM_ID
+			,CONFM_DT
+			,USE_YN
 		) VALUES (
 			 #{memberId}
+			,'1'
 			,#{memberNm}
 			,#{memberPw}
+			,'1'
 			,#{memberEmail}
 			,#{memberBrthdy}
 			,#{memberPhone}
@@ -112,6 +133,11 @@
 			,#{memberAddr}
 			,#{memberAddrDetl}
 			,#{agreeYn}
+			,'Y'
+			,now()
+			,'admin'
+			,now()
+			,'Y'
 		)
 	</insert>
 
@@ -131,4 +157,78 @@
 		AND
 			MEMBER_PHONE = #{memberPhone}
 	</select>
+
+	<!-- SNS 아이디 조회 -->
+	<select id="selectSnsMember" parameterType="String" resultType="LoginVO">
+		/* LoginMapper.selectSnsMember */
+		SELECT
+			 MEMBER_ID								AS memberId
+			,AUTH_GRP_CD							AS authGrpCd
+			,MEMBER_NM								AS memberNm
+			,MASTER_CODE							AS masterCode
+			,MEMBER_EMAIL							AS memberEmail
+			,MEMBER_BRTHDY							AS memberBrthdy
+			,MEMBER_PHONE							AS memberPhone
+			,MEMBER_POST							AS memberPost
+			,MEMBER_ADDR							AS memberAddr
+			,MEMBER_ADDR_DETL						AS memberAddrDetl
+			,DATE_FORMAT(LAST_LOGIN_DT, '%Y%m%d') 	AS lastLoginDt
+			,FAIL_CNT								AS failCnt
+			,SNS_SE									AS snsSe
+	    FROM
+			TB_USER_INFO
+		WHERE
+			SNS_ID = #{value}
+	</select>
+
+	<!-- SNS 아이디 중복 조회 -->
+	<select id="selectSnsIdCount" parameterType="String" resultType="int">
+		/* LoginMapper.selectSnsIdCount */
+		SELECT
+			COUNT(1)
+		FROM
+			TB_USER_INFO
+		WHERE
+			SNS_ID = #{value}
+	</select>
+
+	<!-- SNS 아이디 저장 -->
+	<insert id="insertSnsMember" parameterType="Map">
+		/* LoginMapper.insertSnsMember */
+		INSERT INTO TB_USER_INFO (
+			 MEMBER_ID
+			,AUTH_GRP_CD
+			,MEMBER_NM
+			,MEMBER_PW
+			,MASTER_CODE
+			,MEMBER_EMAIL
+			,MEMBER_BRTHDY
+			,MEMBER_PHONE
+			,AGREE_YN
+			,CONFM_YN
+			,JOIN_DE
+			,CONFM_ID
+			,CONFM_DT
+			,SNS_ID
+			,SNS_SE
+			,USE_YN
+		) VALUES (
+			 #{memberId}
+			,'1'
+			,#{memberNm}
+			,#{memberPw}
+			,'1'
+			,#{memberEmail}
+			,#{memberBrthdy}
+			,#{memberPhone}
+			,'Y'
+			,'Y'
+			,now()
+			,'admin'
+			,now()
+			,#{snsId}
+			,#{snsSe}
+			,'Y'
+		)
+	</insert>
 </mapper>

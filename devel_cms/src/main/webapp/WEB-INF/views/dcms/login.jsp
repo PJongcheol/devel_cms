@@ -66,6 +66,16 @@
 	            <input class="input" type="password" id="memberPw" name="memberPw" placeholder="비밀번호를 입력하세요" />
 
 	            <button type="button" onclick="fn_login()" class="dev-btn">로그인</button>
+
+	            <div class="sns-wrap">
+				    <a href="/api/social/login/oauth.do?sns=kakao" class="sns-btn">
+				        <img src="/images/kakao_login.png" alt="카카오 로그인">
+				    </a>
+				    <a href="/api/social/login/oauth.do?sns=naver" class="sns-btn">
+				        <img src="/images/naver_login.png" alt="네이버 로그인">
+				    </a>
+				</div>
+
 	            <button type="button" onclick="fn_signUp()" class="dev-btn-gray-50">회원가입</button>
 	            <button type="button" onclick="fn_searchId()" class="dev-btn-gray-50">아이디찾기</button>
 		    </div>
