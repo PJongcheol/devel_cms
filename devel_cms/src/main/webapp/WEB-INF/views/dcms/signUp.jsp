@@ -31,26 +31,6 @@
 		});
 	});
 
-	// 로그인
-	function fn_login() {
-		if($("#userId").val().trim() == "") {
-			alert("아이디는 필수입니다.");
-			return false;
-		}
-
-		if($("#password").val().trim() == "") {
-			alert("비밀번호는 필수입니다.");
-			return false;
-		}
-
-		$("#loginForm").submit();
-	}
-
-	// 회원가입
-	function fn_signUp() {
-		$("#signUpForm").submit();
-	}
-
 	// 아이디 중복검사
 	function checkDup(){
 		var memberId = $("#memberId").val();
@@ -198,7 +178,7 @@
 
 		    <div class="dev-body">
 	            <label for="memberId">아이디</label>
-	            <input type="text" class="btn-63" id="memberId" name="memberId" placeholder="영문 또는 숫자 4자리" />
+	            <input type="text" class="btn-63" id="memberId" name="memberId" placeholder="영문 또는 숫자 4자리" maxLength="100" />
 	            <button type="button" onclick="checkDup()" class="btn-35">중복검사</button>
 
 	            <label for="memberPw">비밀번호</label>
@@ -208,26 +188,26 @@
 	            <input type="password" id="memberPw2" name="memberPw2" placeholder="동일한 비밀번호를 입력하세요"/>
 
 	            <label for="memberNm">이름</label>
-	            <input type="text" id="memberNm" name="memberNm" placeholder="이름을 입력하세요" />
+	            <input type="text" id="memberNm" name="memberNm" placeholder="이름을 입력하세요" maxLength="50" />
 
 	            <label for="email">이메일</label>
-	            <input type="text" id="memberEmail" name="memberEmail" placeholder="ex)xxxx@xxx.xxx 형식" />
+	            <input type="text" id="memberEmail" name="memberEmail" placeholder="ex)xxxx@xxx.xxx 형식" maxLength="40"/>
 
 	            <label for="memberBrthdy">생년월일</label>
-	            <input type="text" class="datepicker" id="memberBrthdy" name="memberBrthdy" readonly/>
+	            <input type="text" class="datepicker" id="memberBrthdy" name="memberBrthdy" maxLength="20" readonly/>
 
 	            <label for="memberPhone">핸드폰번호</label>
 	            <input type="text" class="tel" id="memberPhone" name="memberPhone" placeholder="핸드폰 번호를 입력하세요" />
 
 	            <label for="memberPost">우편번호</label>
-	            <input type="text" class="btn-63" id="memberPost" name="memberPost" placeholder="" readonly />
+	            <input type="text" class="btn-63" id="memberPost" name="memberPost" placeholder="" maxLength="8" readonly />
 	            <button type="button" onclick="fn_juso()" class="btn-35">우편번호검색</button>
 
 	            <label for="memberAddr">주소</label>
-	            <input type="text" id="memberAddr" name="memberAddr" placeholder="주소찾기 버튼을 클릭하세요" readonly/>
+	            <input type="text" id="memberAddr" name="memberAddr" placeholder="주소찾기 버튼을 클릭하세요" maxLength="255" readonly/>
 
 	            <label for="memberAddrDetl">상세주소</label>
-	            <input type="text" id="memberAddrDetl" name="memberAddrDetl" placeholder="상세주소를 입력하세요" />
+	            <input type="text" id="memberAddrDetl" name="memberAddrDetl" placeholder="상세주소를 입력하세요" maxLength="255" />
 
 	            <div class="agree-box">
 				    <label>

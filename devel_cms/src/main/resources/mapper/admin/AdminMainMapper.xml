@@ -81,9 +81,12 @@
 			 MEMBER_ID		AS memberId
 			,MEMBER_NM		AS memberNm
 			,MASTER_CODE	AS masterCode
+			,JOIN_DE		AS joinDe
 			,USE_YN			AS useYn
 		FROM
 			TB_USER_INFO
+		ORDER BY
+			JOIN_DE DESC
 		LIMIT 0,5
 	</select>
 </mapper>

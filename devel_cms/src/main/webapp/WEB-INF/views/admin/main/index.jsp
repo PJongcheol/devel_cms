@@ -97,7 +97,7 @@
 		                                            <c:when test="${user.masterCode eq '1'}">일반사용자</c:when>
 		                                        </c:choose>
 		                                    </td>
-		                                    <td></td>
+		                                    <td><c:out value="${user.joinDe}"/></td>
 		                                    <td class="${user.useYn eq 'Y' ? 'text-color-blue' : 'text-color-red'}"><c:out value="${user.useYn eq 'Y' ? '활성' : '비활성'}"/></td>
 		                                </tr>
 		                            </c:forEach>
@@ -123,6 +123,10 @@
 
 		        <div class="dashboard-box-body">
 		            <table>
+		            	<colgroup>
+				        	<col style="width:80%">
+				        	<col style="width:20%">
+				        </colgroup>
 		                <thead>
 		                    <tr>
 		                        <th>제목</th>

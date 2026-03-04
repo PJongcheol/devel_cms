@@ -258,3 +258,8 @@ function fn_layerClose(seq) {
 
 	$("#popup_"+seq).remove();
 }
+
+// 로그인 페이지로 리다이렉트(세션 삭제)
+function fn_sessionLogin() {
+	location.href = "/login.do";
+}

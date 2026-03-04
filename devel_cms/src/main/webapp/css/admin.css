@@ -34,7 +34,7 @@ header .user { display:flex; align-items:center; gap:10px; }
 .sidebar .submenu {
     display: none;
     background:#1b2b3d;
-    padding: 5px 0;
+/*     padding: 5px 0; */
 }
 .sidebar .submenu li {
     padding: 10px 20px 10px 45px;
@@ -52,6 +52,24 @@ header .user { display:flex; align-items:center; gap:10px; }
 
 /* 오픈 상태일 때 화살표 회전 */
 .sidebar li.open .arrow { transform:rotate(90deg); }
+
+/* 1단계 메뉴 */
+.sidebar li.active > a .menu-title,
+.sidebar li.active > .menu-title {
+    background:#2a4b6c;
+    color:#fff;
+}
+
+/* 2단계 메뉴 */
+.sidebar .submenu li.active {
+    background:#2a4b6c;
+    color:#fff;
+}
+
+/* 아이콘도 같이 흰색 */
+.sidebar li.active i {
+    color:#fff;
+}
 
 /* Main Content Area */
 .main { flex:1; padding:30px; overflow-y:auto; }
@@ -105,6 +123,28 @@ footer { background:#fafafa; padding:15px 30px; text-align:center; font-size:13p
     text-decoration: none;
     outline: none;
     box-shadow: none;
+}
+
+.menu-link.active .menu-title,
+.menu-link.active {
+    background: #2a4b6c;
+    color: #fff;
+}
+
+.menu-link.active span {
+    color: #fff;
+}
+
+/* 자식 메뉴 active 강제 적용 */
+.submenu .menu-link.active li {
+    background:#2a4b6c;
+    color:#fff;
+}
+
+/* hover도 맞추고 싶으면 */
+.submenu .menu-link.active li:hover {
+    background:#2a4b6c;
+    color:#fff;
 }
 
 /* ===============================
@@ -609,6 +649,10 @@ tbody tr td {
 
 .a-decoration-non {
 	text-decoration: none;
+}
+.a-decoration-color-non {
+	text-decoration: none;
+	color: inherit;
 }
 
 table input[type="text"] {

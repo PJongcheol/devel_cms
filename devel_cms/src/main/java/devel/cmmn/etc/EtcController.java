@@ -10,19 +10,21 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import javax.management.RuntimeErrorException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import devel.cmmn.etc.service.EtcService;
 import devel.cmmn.file.service.FileService;
+import devel.cmmn.login.vo.LoginVO;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
@@ -47,6 +49,9 @@ public class EtcController {
 
 	@Autowired
 	FileService fileService;
+
+	@Autowired
+	EtcService etcService;
 
 	@Value("${file.upload.path}")
 	private String uploadPath;
@@ -161,4 +166,48 @@ public class EtcController {
 
 		return result;
 	}
+
+	/**
+     * 회원정보 수정 팝업
+     * @Method : memberProfile
+     * @throws Exception
+     * @return : String
+     */
+	@GetMapping(value ="/memberProfile.do")
+	public String memberProfile(@RequestParam Map<String, Object> param
+			, ModelMap model, HttpSession session, HttpServletRequest request) throws Exception {
+
+		LoginVO user = (LoginVO) request.getSession().getAttribute("LoginVO");
+		param.put("memberId", user.getMemberId());
+
+		// 사용자 정보 조회
+		model.addAttribute("detail", etcService.selectMemeberDtl(param));
+
+		return "/etc/popup/profilePop";
+	}
+
+	/**
+     * 회원정보 수정
+     * @Method : memberProfile
+     * @throws Exception
+     * @return : Map
+     */
+	@PostMapping(value ="/updateProfile.do")
+	@ResponseBody
+	public Map<String, Object> updateProfile(@RequestParam Map<String, Object> param
+			, ModelMap model, HttpSession session, HttpServletRequest request) throws Exception {
+
+		LoginVO user = (LoginVO) request.getSession().getAttribute("LoginVO");
+		param.put("userId", user.getMemberId());
+
+		Map<String, Object> result = new HashMap<>();
+
+		// 회원정보 수정
+		etcService.updateProfile(param);
+
+		result.put("message", "ok");
+
+		return result;
+	}
+
 }
