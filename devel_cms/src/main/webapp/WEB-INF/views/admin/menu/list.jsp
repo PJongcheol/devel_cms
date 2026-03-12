@@ -121,6 +121,9 @@
 				  success: function(data) {
 					  if(data.message == "ok") {
 						  alert("정상적으로 처리되었습니다.");
+						  // interceptor를 위해 빈값 처리
+						  $("#mngMenuForm #menuId").val("");
+						  $("#mngMenuForm #menuPid").val("");
 						  $("#mngMenuForm").submit();
 					  }
 

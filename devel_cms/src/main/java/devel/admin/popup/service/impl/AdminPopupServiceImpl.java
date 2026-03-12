@@ -71,7 +71,7 @@ public class AdminPopupServiceImpl implements AdminPopupService {
 	 * @return void
 	 * @exception Exception
 	 */
-	public void savePopup(Map<String, Object> param, List<MultipartFile> files) throws Exception {
+	public void savePopup(Map<String, Object> param) throws Exception {
 		if("I".equals(param.get("mode"))) { // 저장
 			adminPopupMapper.insertPopup(param);
 		} else { // 수정

@@ -142,7 +142,7 @@ public class AdminPopupController extends BaseController {
 		String atchfileno = param.get("atchfileno") == null ? "" : param.get("atchfileno").toString();
 
 		// 첨부파일이 하나라도 있다면
-		if(files != null && files.size() > 0) {
+		if(files != null && !files.isEmpty() && !files.get(0).isEmpty()) {
 			// 기존에 이미 첨부된 파일이 없다면 첨부파일 일련번호를 먼저 조회한다.
 			if(param.get("atchfileno") == null || "".equals(param.get("atchfileno"))) {
 				atchfileno = String.valueOf(fileService.selectAtchfileno());
@@ -154,7 +154,7 @@ public class AdminPopupController extends BaseController {
 
 		param.put("atchfileno", atchfileno);
 
-		adminPopupService.savePopup(param, files);
+		adminPopupService.savePopup(param);
 
 		result.put("message", "ok");
 

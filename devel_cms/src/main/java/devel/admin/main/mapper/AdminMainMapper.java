@@ -18,4 +18,7 @@ public interface AdminMainMapper {
 
 	// 대시보드 회원 목록 조회
 	public List<Map<String, Object>> selectIndexMemberList();
+
+	// 대시보드 공지사항 목록 조회
+	public List<Map<String, Object>> selectBbsList(Map<String, Object> param);
 }

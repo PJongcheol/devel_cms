@@ -4,16 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import devel.admin.bbs.mapper.AdminBbsMapper;
 import devel.admin.bbs.service.AdminBbsService;
 
 /**
- * 게시물 처리를 위한 ServiceImpl
+ * bbs 처리를 위한 ServiceImpl
  * @Class Name   : AdminBbsServiceImpl
-   @Description  :게시물 처리를 위한 Service
+   @Description  :bbs 처리를 위한 Service
  * @author  : PJC
  * @date    : 2026. 2. 6
  * @desc    :
@@ -31,7 +33,7 @@ public class AdminBbsServiceImpl implements AdminBbsService{
 	AdminBbsMapper adminBbsMapper;
 
 	/**
-	 * 게시물 목록 카운트
+	 * 게시판 목록 카운트
 	 * @param Map
 	 * @return int
 	 * @exception Exception
@@ -42,7 +44,7 @@ public class AdminBbsServiceImpl implements AdminBbsService{
 	}
 
 	/**
-	 * 게시물 목록
+	 * 게시판 목록
 	 * @param Map
 	 * @return List
 	 * @exception Exception
@@ -53,7 +55,7 @@ public class AdminBbsServiceImpl implements AdminBbsService{
 	}
 
 	/**
-	 * 게시물 상세
+	 * 게시판 상세
 	 * @param Map
 	 * @return Map
 	 * @exception Exception
@@ -64,7 +66,7 @@ public class AdminBbsServiceImpl implements AdminBbsService{
 	}
 
 	/**
-	 * 게시물 필드 목록
+	 * 게시판 필드 목록
 	 * @param Map
 	 * @return List
 	 * @exception Exception
@@ -84,7 +86,7 @@ public class AdminBbsServiceImpl implements AdminBbsService{
 	}
 
 	/**
-	 * 게시물 상세
+	 * 게시판 상세
 	 * @param Map
 	 * @return Map
 	 * @exception Exception
@@ -92,36 +94,36 @@ public class AdminBbsServiceImpl implements AdminBbsService{
 	@Override
 	public void saveBbs(Map<String, Object> param, List<Map<String, Object>> list) throws Exception {
 		if("I".equals(param.get("mode"))) {
-			// 게시물 일련번호
+			// 게시판 일련번호
 			int bbsSeq = adminBbsMapper.selectBbsSeq();
 			param.put("bbsSeq", bbsSeq);
 
-			// 게시물 저장
+			// 게시판 저장
 			adminBbsMapper.insertBbs(param);
 
 			for(int i=0; i<list.size(); i++) {
 				Map<String, Object> map = list.get(i);
 				map.put("bbsSeq", bbsSeq);
 
-				// 게시물 필드 일련번호
+				// 게시판 필드 일련번호
 				int seq = adminBbsMapper.selectBbsFieldSeq(param);
 				map.put("seq", seq);
 
-				// 게시물 필드 목록 저장
+				// 게시판 필드 목록 저장
 				adminBbsMapper.insertBbsField(map);
 			}
 		} else {
-			// 게시물 수정
+			// 게시판 수정
 			adminBbsMapper.updateBbs(param);
 
-			// 게시물 유형이 기본이라면 필드 목록을 수정처리 하고 기본이 아니라면 기존 필드 목록 삭제
+			// 게시판 유형이 기본이라면 필드 목록을 수정처리 하고 기본이 아니라면 기존 필드 목록 삭제
 			if("DEFAULT".equals(param.get("bbsType"))) {
 				for(int i=0; i<list.size(); i++) {
 					Map<String, Object> map = list.get(i);
 					map.put("bbsSeq", param.get("bbsSeq"));
 
 					if(map.get("seq") == null || "".equals(map.get("seq"))) {
-						// 게시물 필드 일련번호
+						// 게시판 필드 일련번호
 						int seq = adminBbsMapper.selectBbsFieldSeq(param);
 						map.put("seq", seq);
 
@@ -139,13 +141,124 @@ public class AdminBbsServiceImpl implements AdminBbsService{
 	}
 
 	/**
-	 * 게시물 삭제
+	 * 게시판 삭제
 	 * @param Map
 	 * @return void
 	 * @exception Exception
 	 */
+	@Override
 	public void deleteBbs(Map<String, Object> param) throws Exception {
 		adminBbsMapper.deleteBbs(param);
 		adminBbsMapper.deleteBbsField(param);
+	}
+
+	/**
+	 * bbs 목록 카운트
+	 * @param Map
+	 * @return int
+	 * @exception Exception
+	 */
+	@Override
+	public int selectBbsTotalCount(Map<String, Object> param) throws Exception {
+		return adminBbsMapper.selectBbsTotalCount(param);
+	}
+
+	/**
+	 * bbs 목록 조회
+	 * @param Map
+	 * @return List
+	 * @exception Exception
+	 */
+	@Override
+	public List<Map<String, Object>> selectBbsList(Map<String, Object> param) throws Exception {
+		return adminBbsMapper.selectBbsList(param);
+	}
+
+	/**
+	 * bbs 비밀번호 체크
+	 * @param Map
+	 * @return int
+	 * @exception Exception
+	 */
+	@Override
+	public int bbsPassword(Map<String, Object> param) throws Exception {
+		return adminBbsMapper.bbsPassword(param);
+	}
+
+	/**
+	 * bbs 조회
+	 * @param Map
+	 * @return Map
+	 * @exception Exception
+	 */
+	@Override
+	public Map<String, Object> selectBoardMst(Map<String, Object> param) throws Exception {
+		return adminBbsMapper.selectBoardMst(param);
+	}
+
+	/**
+	 * bbs 필드 조회
+	 * @param Map
+	 * @return List
+	 * @exception Exception
+	 */
+	@Override
+	public List<Map<String, Object>> selectAdminBoardFieldList(Map<String, Object> param) throws Exception {
+		return adminBbsMapper.selectAdminBoardFieldList(param);
+	}
+
+	/**
+	 * bbs 상세 조회
+	 * @param Map
+	 * @return Map
+	 * @exception Exception
+	 */
+	@Override
+	public Map<String, Object> selectBoardDtl(Map<String, Object> param) throws Exception {
+		return adminBbsMapper.selectBoardDtl(param);
+	}
+
+	/**
+	 * bbs 저장
+	 * @param Map
+	 * @return void
+	 * @exception Exception
+	 */
+	@Override
+	public void saveBoard(Map<String, Object> param) throws Exception {
+		// 비밀번호 암호화
+		String pw = param.get("nttPassword").toString();
+		param.put("nttPassword", DigestUtils.sha256Hex(pw));
+
+		if("I".equals(param.get("mode"))) { // 저장
+			// nttSeq 조회
+			param.put("nttSeq", adminBbsMapper.selectBoardSeq(param));
+
+			adminBbsMapper.insertBoard(param);
+		} else { // 수정
+			adminBbsMapper.updateBoard(param);
+		}
+	}
+
+	/**
+	 * bbs 삭제
+	 * @param Map
+	 * @return void
+	 * @exception Exception
+	 */
+	@Override
+	public void deleteBoard(Map<String, Object> param) throws Exception {
+		adminBbsMapper.deleteBoard(param);
+	}
+
+	/**
+	 * bbs 조회수 업데이트
+	 * @param Map
+	 * @return void
+	 * @exception Exception
+	 */
+	@Override
+	public void updateBoardRdcnt(Map<String, Object> param) throws Exception {
+		adminBbsMapper.updateBoardRdcnt(param);
 	}
 }

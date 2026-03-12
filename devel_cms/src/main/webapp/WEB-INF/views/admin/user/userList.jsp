@@ -100,14 +100,13 @@
 			</form>
 	        <table class="table-hover">
 	        	<colgroup>
-		        	<col style="width:15%">
-		        	<col style="width:14%">
-		        	<col style="width:10%">
-		        	<col style="width:13%">
-		        	<col style="width:8%">
-		        	<col style="width:8%">
-		        	<col style="width:15%">
 		        	<col style="width:17%">
+		        	<col style="width:15%">
+		        	<col style="width:12%">
+		        	<col style="width:15%">
+		        	<col style="width:13%">
+		        	<col style="width:13%">
+		        	<col style="width:15%">
 		        </colgroup>
 	            <thead>
 	                <tr>
@@ -117,8 +116,7 @@
 	                	<th>핸드폰번호</th>
 	                	<th>승인여부</th>
 	                	<th>사용여부</th>
-	                	<th>수정자ID</th>
-	                	<th>수정일시</th>
+	                	<th>가입일</th>
 	                </tr>
 	            </thead>
 	            <tbody>
@@ -166,14 +164,13 @@
 											</c:otherwise>
 										</c:choose>
 									</td>
-									<td><c:out value="${item.updId }"/></td>
-									<td><c:out value="${item.updDt }"/></td>
+									<td><c:out value="${item.joinDe }"/></td>
 								</tr>
 							</c:forEach>
 						</c:when>
 						<c:otherwise>
 							<tr>
-								<td colspan="8">데이터가 존재하지 않습니다.</td>
+								<td colspan="7">데이터가 존재하지 않습니다.</td>
 							</tr>
 						</c:otherwise>
 	            	</c:choose>

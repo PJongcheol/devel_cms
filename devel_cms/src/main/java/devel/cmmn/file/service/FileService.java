@@ -58,43 +58,45 @@ public class FileService {
 	public void uploadFiles(Map<String, Object> param, List<MultipartFile> files) throws Exception {
 
 		for(MultipartFile file : files) {
-			param.put("fileord", fileMapper.selectFileord(param)); // 파일 순서
+			if(file != null && !file.isEmpty()){
+				param.put("fileord", fileMapper.selectFileord(param)); // 파일 순서
 
-			String orgfilenm = file.getOriginalFilename(); // 실제 파일명
-			param.put("orgfilenm", orgfilenm);
+				String orgfilenm = file.getOriginalFilename(); // 실제 파일명
+				param.put("orgfilenm", orgfilenm);
 
-			int index = orgfilenm.lastIndexOf("."); // 확장자 추출을 위한 인덱스
+				int index = orgfilenm.lastIndexOf("."); // 확장자 추출을 위한 인덱스
 
-			String fileext = ""; // 파일 확장자
+				String fileext = ""; // 파일 확장자
 
-			if(index > -1) {
-				fileext = orgfilenm.substring(index);
+				if(index > -1) {
+					fileext = orgfilenm.substring(index);
+				}
+
+				param.put("fileext", fileext.replace(".", ""));
+
+				String svfilenm = UUID.randomUUID().toString() + fileext;
+				param.put("svfilenm", svfilenm); // 변경 파일명
+				param.put("filesize", file.getSize()); // 파일 사이즈
+
+				// uploadFiles 메소드를 쓰는 곳에서 dir 를 넣어줌
+				Path path = Paths.get(uloadDir, param.get("dir").toString());
+				String dir = path.toString();
+
+				param.put("filedir", dir); // 파일 경로
+
+				// 경로가 없다면 생성
+				File directory = new File(dir);
+				if(!directory.exists()) {
+					directory.mkdirs();
+				}
+
+				// 실제 저장
+				String upfile = dir + File.separator + svfilenm;
+				file.transferTo(new File(upfile));
+
+				// 파일 정보 저장
+				fileMapper.insertFile(param);
 			}
-
-			param.put("fileext", fileext.replace(".", ""));
-
-			String svfilenm = UUID.randomUUID().toString() + fileext;
-			param.put("svfilenm", svfilenm); // 변경 파일명
-			param.put("filesize", file.getSize()); // 파일 사이즈
-
-			// uploadFiles 메소드를 쓰는 곳에서 dir 를 넣어줌
-			Path path = Paths.get(uloadDir, param.get("dir").toString());
-			String dir = path.toString();
-
-			param.put("filedir", dir); // 파일 경로
-
-			// 경로가 없다면 생성
-			File directory = new File(dir);
-			if(!directory.exists()) {
-				directory.mkdirs();
-			}
-
-			// 실제 저장
-			String upfile = dir + File.separator + svfilenm;
-			file.transferTo(new File(upfile));
-
-			// 파일 정보 저장
-			fileMapper.insertFile(param);
 		}
 	}
 

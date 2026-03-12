@@ -145,8 +145,8 @@
 	            	</colgroup>
 	                <tbody class="no-hover">
 	                    <tr>
-	                        <th>아이디</th>
-	                        <td><c:out value="${detail.memberId }"/></td>
+	                        <th>아이디 (가입일)</th>
+	                        <td><c:out value="${detail.memberId }"/> (<c:out value="${detail.joinDe }"/>)</td>
 	                        <th>로그인실패카운트</th>
 	                        <td>
 	                        	<c:out value="${detail.failCnt }"/>

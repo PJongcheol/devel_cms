@@ -118,7 +118,7 @@
 		    <div class="dashboard-box">
 		        <div class="dashboard-box-header">
 		            <h3>공지사항</h3>
-		            <a href="javascript:void(0)" onclick="fn_goMenu('/admin/user/userList.do', '11', '10')" class="dashboard-more">더보기</a>
+		            <a href="javascript:void(0)" onclick="fn_goMenu('/admin/bbs/board/list.do?mId=15&mPid=1', '15', '1')" class="dashboard-more">더보기</a>
 		        </div>
 
 		        <div class="dashboard-box-body">
@@ -139,9 +139,7 @@
 		                            <c:forEach var="notice" items="${noticeList}" begin="0" end="4">
 		                                <tr>
 		                                    <td class="left-align">
-		                                        <a href="/admin/notice/detail.do?seq=${notice.seq}" class="a-decoration-non">
-		                                            <c:out value="${notice.title}"/>
-		                                        </a>
+		                                    	<c:out value="${fn:length(notice.nttSj) > 13 ? fn:substring(notice.nttSj, 0, 13).concat('...') : notice.nttSj }"/>
 		                                    </td>
 		                                    <td><c:out value="${notice.regDt}"/></td>
 		                                </tr>

@@ -30,4 +30,7 @@ public interface AdminMenuMapper {
 
 	// 메뉴권한 삭제
 	public void deleteMenuAuth(List<Map<String, Object>> param);
+
+	// 메뉴 상세 정보 조회
+	public Map<String, Object> selectMenuDtl(Map<String, Object> param);
 }

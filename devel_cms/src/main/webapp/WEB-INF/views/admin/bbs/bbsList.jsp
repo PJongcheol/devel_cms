@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시물관리</title>
+<title>게시판관리</title>
 <script type="text/javascript">
 	$(document).ready(function(){
 
@@ -50,7 +50,7 @@
 </head>
 <body class="common-page">
 	<div class="menu-container">
-	    <h2>게시물관리</h2>
+	    <h2>게시판관리</h2>
 	    <div class="common_section">
 	    	<form id="adminBbsDetailForm" name="adminBbsDetailForm" method="post" action="/admin/bbs/form.do">
 				<input type="hidden" id="mode" name="mode"/>

@@ -63,7 +63,8 @@ public class AdminMainController extends BaseController{
 		model.addAttribute("userList", adminMainService.selectIndexMemberList());
 
 		// 대시보드 공지사항 조회
-//		model.addAttribute("popupList", adminMainService.selectPopupList());
+		param.put("bbsSeq", "1"); // 공지사항 - 추후 대시보드를 공지사항 대신 바꾸고 싶다면 bbsSeq를 변경(board인 경우)
+		model.addAttribute("noticeList", adminMainService.selectBbsList(param));
 
 		return adminLayout(model, "/WEB-INF/views/admin/main/index");
 

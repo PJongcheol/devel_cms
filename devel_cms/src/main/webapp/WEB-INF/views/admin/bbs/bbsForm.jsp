@@ -26,17 +26,17 @@
 			var bbsList = [];
 			var bbsType = $("#bbsType").val();
 
-			// 사이트 구분
-			if($("#siteCode").val() == "") {
-				alert("사이트구분은 필수입니다.");
-				$("#siteCode").focus();
-				return false;
-			}
-
 			// 게시판명
 			if($("#bbsNm").val().trim() == "") {
 				alert("게시판명은 필수입니다.");
 				$("#bbsNm").focus();
+				return false;
+			}
+
+			// 사이트 구분
+			if($("#siteCode").val() == "") {
+				alert("사이트구분은 필수입니다.");
+				$("#siteCode").focus();
 				return false;
 			}
 
@@ -48,11 +48,11 @@
 			}
 
 			// 뷰어 사용여부
-			if($("#viewerYn").val() == "") {
-				alert("뷰어 사용여부는 필수입니다.");
-				$("#viewerYn").focus();
-				return false;
-			}
+// 			if($("#viewerYn").val() == "") {
+// 				alert("뷰어 사용여부는 필수입니다.");
+// 				$("#viewerYn").focus();
+// 				return false;
+// 			}
 
 			// 에디터 사용여부
 			if($("#editrYn").val() == "") {
@@ -61,7 +61,7 @@
 				return false;
 			}
 
-			// 에디터 사용여부
+			// 게시판유형
 			if($("#bbsType").val() == "") {
 				alert("게시판유형은 필수입니다.");
 				$("#bbsType").focus();
@@ -76,20 +76,20 @@
 			}
 
 			// 게시글상위고정
-			if($("#fixingYn").val() == "") {
-				alert("게시글 상위고정은 필수입니다.");
-				$("#fixingYn").focus();
-				return false;
-			}
+// 			if($("#fixingYn").val() == "") {
+// 				alert("게시글 상위고정은 필수입니다.");
+// 				$("#fixingYn").focus();
+// 				return false;
+// 			}
 
 			// 댓글사용
-			if($("#replyYn").val() == "") {
-				alert("댓글사용은 필수입니다.");
-				$("#replyYn").focus();
-				return false;
-			}
+// 			if($("#replyYn").val() == "") {
+// 				alert("댓글사용은 필수입니다.");
+// 				$("#replyYn").focus();
+// 				return false;
+// 			}
 
-			// 댓글사용
+			// 첨부파일
 			if($("#fileAtchYn").val() == "") {
 				alert("첨부파일사용은 필수입니다.");
 				$("#fileAtchYn").focus();
@@ -131,9 +131,7 @@
 						,columnNm 	: $("#columnNm_"+idx).val()
 						,columnSj 	: $("#columnSj_"+idx).val()
 						,fieldSize 	: $("#fieldSize_"+idx).val()
-						,fieldStyle : $("#fieldStyle_"+idx).val()
 						,listOrdr 	: $("#listOrdr_"+idx).val()
-						,writeOrdr 	: $("#writeOrdr_"+idx).val()
 						,useYn 		: ($("#useYn_"+idx).is(":checked") ? 'Y' : 'N')
 						,essntlYn 	: ($("#essntlYn_"+idx).is(":checked") ? 'Y' : 'N')
 						,detailYn 	: ($("#detailYn_"+idx).is(":checked") ? 'Y' : 'N')
@@ -222,18 +220,18 @@
 	            	</colgroup>
 	                <tbody class="no-hover">
 	                    <tr>
-	                        <th>사이트구분</th>
-	                        <td colspan="3">
+							<th>게시판명</th>
+	                        <td colspan="3"><input type="text" id="bbsNm" name="bbsNm" value="${detail.bbsNm }" maxlength="150"></td>
+	                    </tr>
+	                    <tr>
+	                    	<th>사이트구분</th>
+	                        <td>
 								<select id="siteCode" name="siteCode">
 									<option value="">선택</option>
 									<option value="admin" ${detail.siteCode eq 'admin' ? 'selected' : '' }>admin</option>
 									<option value="user" ${detail.siteCode eq 'user' ? 'selected' : '' }>user</option>
 								</select>
 							</td>
-	                    </tr>
-	                    <tr>
-	                        <th>게시판명</th>
-	                        <td><input type="text" id="bbsNm" name="bbsNm" value="${detail.bbsNm }" maxlength="150"></td>
 	                        <th>페이지목록</th>
 	                        <td>
 								<select id="pageListCo" name="pageListCo">
@@ -248,14 +246,14 @@
 	                        </td>
 	                    </tr>
 	                    <tr>
-	                        <th>뷰어 사용여부</th>
-	                        <td>
-								<select id="viewerYn" name="viewerYn">
-									<option value="">선택</option>
-									<option value="Y" ${detail.viewerYn eq 'Y' ? 'selected' : '' }>사용</option>
-									<option value="N" ${detail.viewerYn eq 'N' ? 'selected' : '' }>미사용</option>
-								</select>
-	                        </td>
+<!-- 	                        <th>뷰어 사용여부</th> -->
+<!-- 	                        <td> -->
+<!-- 								<select id="viewerYn" name="viewerYn"> -->
+<!-- 									<option value="">선택</option> -->
+<%-- 									<option value="Y" ${detail.viewerYn eq 'Y' ? 'selected' : '' }>사용</option> --%>
+<%-- 									<option value="N" ${detail.viewerYn eq 'N' ? 'selected' : '' }>미사용</option> --%>
+<!-- 								</select> -->
+<!-- 	                        </td> -->
 	                        <th>에디터 사용여부</th>
 	                        <td>
 								<select id="editrYn" name="editrYn">
@@ -264,8 +262,6 @@
 									<option value="N" ${detail.editrYn eq 'N' ? 'selected' : '' }>미사용</option>
 								</select>
 	                        </td>
-	                    </tr>
-	                    <tr>
 	                        <th>게시판유형</th>
 	                        <td>
 								<select id="bbsType" name="bbsType">
@@ -274,6 +270,8 @@
 									<option value="MOVIE" ${detail.bbsType eq 'MOVIE' ? 'selected' : '' }>동영상</option>
 								</select>
 	                        </td>
+	                    </tr>
+	                    <tr>
 	                        <th>사용여부</th>
 	                        <td>
 								<select id="useYn" name="useYn">
@@ -282,26 +280,6 @@
 									<option value="N" ${detail.useYn eq 'N' ? 'selected' : '' }>미사용</option>
 								</select>
 	                        </td>
-	                    </tr>
-	                    <tr>
-	                        <th>게시글상위고정</th>
-	                        <td>
-								<select id="fixingYn" name="fixingYn">
-									<option value="">선택</option>
-									<option value="Y" ${detail.fixingYn eq 'Y' ? 'selected' : '' }>사용</option>
-									<option value="N" ${detail.fixingYn eq 'N' ? 'selected' : '' }>미사용</option>
-								</select>
-	                        </td>
-	                        <th>댓글사용</th>
-	                        <td>
-								<select id="replyYn" name="replyYn">
-									<option value="">선택</option>
-									<option value="Y" ${detail.replyYn eq 'Y' ? 'selected' : '' }>사용</option>
-									<option value="N" ${detail.replyYn eq 'N' ? 'selected' : '' }>미사용</option>
-								</select>
-	                        </td>
-	                    </tr>
-	                    <tr>
 	                        <th>첨부파일사용</th>
 	                        <td>
 								<select id="fileAtchYn" name="fileAtchYn">
@@ -316,12 +294,31 @@
 									</c:forEach>
 								</select>
 	                        </td>
+	                    </tr>
+<!-- 	                    <tr> -->
+<!-- 	                        <th>게시글상위고정</th> -->
+<!-- 	                        <td> -->
+<!-- 								<select id="fixingYn" name="fixingYn"> -->
+<!-- 									<option value="">선택</option> -->
+<%-- 									<option value="Y" ${detail.fixingYn eq 'Y' ? 'selected' : '' }>사용</option> --%>
+<%-- 									<option value="N" ${detail.fixingYn eq 'N' ? 'selected' : '' }>미사용</option> --%>
+<!-- 								</select> -->
+<!-- 	                        </td> -->
+<!-- 	                        <th>댓글사용</th> -->
+<!-- 	                        <td> -->
+<!-- 								<select id="replyYn" name="replyYn"> -->
+<!-- 									<option value="">선택</option> -->
+<%-- 									<option value="Y" ${detail.replyYn eq 'Y' ? 'selected' : '' }>사용</option> --%>
+<%-- 									<option value="N" ${detail.replyYn eq 'N' ? 'selected' : '' }>미사용</option> --%>
+<!-- 								</select> -->
+<!-- 	                        </td> -->
+<!-- 	                    </tr> -->
+	                    <tr>
+
 	                        <th>파일제한용량</th>
 							<td><input type="text" id="fileLmttSize" name="fileLmttSize" value="${detail.fileLmttSize }" maxlength="20" placeholder="MB"></td>
-	                    </tr>
-	                    <tr>
-	                        <th>파일확장자필터</th>
-	                        <td colspan="3"><input type="text" id="fileExtFlter" name="fileExtFlter" value="${detail.fileExtFlter }" maxlength="255" placeholder="ex) jpg,jpeg,png"></td>
+							<th>파일확장자필터</th>
+	                        <td><input type="text" id="fileExtFlter" name="fileExtFlter" value="${detail.fileExtFlter }" maxlength="255" placeholder="ex) jpg,jpeg,png"></td>
 	                    </tr>
 	                    <tr>
 	                        <th>금지어</th>
@@ -366,15 +363,13 @@
 								<input type="hidden" id="seq_${fieldStatus.count }" name="seq" value="${field.seq }" />
 								<input type="hidden" id="columnNm_${fieldStatus.count }" name="columnNm" value="${field.columnNm }" />
 								<input type="text" id="columnSj_${fieldStatus.count }" name="columnSj" value="${field.columnSj }" maxlength="50" readonly>
-								<input type="text" id="fieldSize_${fieldStatus.count }" name="fieldSize" value="${field.fieldSize }" maxlength="200" placeholder="px">
-								<input type="text" id="fieldStyle_${fieldStatus.count }" name="fieldStyle" value="${field.fieldStyle }" maxlength="200" placeholder="스타일">
-								<input type="text" id="listOrdr_${fieldStatus.count }" name="listOrdr" value="${field.listOrdr }" class="only_number" placeholder="목록순서">
-								<input type="text" id="writeOrdr_${fieldStatus.count }" name="writeOrdr" value="${field.writeOrdr }" class="only_number" placeholder="등록순서">
+<%-- 								<input type="text" id="fieldSize_${fieldStatus.count }" name="fieldSize" value="${field.fieldSize }" maxlength="200" placeholder="px"> --%>
+<%-- 								<input type="text" id="listOrdr_${fieldStatus.count }" name="listOrdr" value="${field.listOrdr }" class="only_number" placeholder="목록순서"> --%>
 								<input type="checkbox" id="useYn_${fieldStatus.count }" name="useYn" value="Y" class="normal_check" ${field.essentialYn eq 'Y' ? 'checked onclick="return false"' : '' } ${field.useYn eq 'Y' ? 'checked' : '' }>사용
 								<input type="checkbox" id="essntlYn_${fieldStatus.count }" name="essntlYn" value="Y" class="normal_check" ${field.essentialYn eq 'Y' ? 'checked onclick="return false"' : '' } ${field.essntlYn eq 'Y' ? 'checked' : '' }>필수
-								<input type="checkbox" id="detailYn_${fieldStatus.count }" name="detailYn" value="Y" class="normal_check" ${field.detailYn eq 'Y' ? 'checked' : '' }>보기
-								<input type="checkbox" id="listYn_${fieldStatus.count }" name="listYn" value="Y" class="normal_check" ${field.listYn eq 'Y' ? 'checked' : '' }>목록
-								<input type="checkbox" id="searchYn_${fieldStatus.count }" name="searchYn" value="Y" class="normal_check" ${field.searchYn eq 'Y' ? 'checked' : '' }>검색
+								<input type="checkbox" id="detailYn_${fieldStatus.count }" name="detailYn" value="Y" class="normal_check" ${field.essentialYn eq 'Y' ? 'checked onclick="return false"' : '' } ${field.detailYn eq 'Y' ? 'checked' : '' }>보기
+<%-- 								<input type="checkbox" id="listYn_${fieldStatus.count }" name="listYn" value="Y" class="normal_check" ${field.listYn eq 'Y' ? 'checked' : '' }>목록 --%>
+<%-- 								<input type="checkbox" id="searchYn_${fieldStatus.count }" name="searchYn" value="Y" class="normal_check" ${field.searchYn eq 'Y' ? 'checked' : '' }>검색 --%>
 							</td>
 	                    </tr>
                     </c:forEach>

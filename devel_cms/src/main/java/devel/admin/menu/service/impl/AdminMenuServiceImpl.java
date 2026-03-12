@@ -156,4 +156,14 @@ public class AdminMenuServiceImpl implements AdminMenuService{
 	public void deleteMenuAuth(List<Map<String, Object>> param) throws Exception {
 		adminMenuMapper.deleteMenuAuth(param);
 	}
+
+	/**
+	 * 메뉴 상세 정보 조회
+	 * @param Map
+	 * @return Map
+	 * @exception Exception
+	 */
+	public Map<String, Object> selectMenuDtl(Map<String, Object> param) throws Exception {
+		return adminMenuMapper.selectMenuDtl(param);
+	}
 }

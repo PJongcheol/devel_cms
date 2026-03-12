@@ -155,16 +155,45 @@
 		DELETE FROM TB_MENU_AUTH
 		WHERE
 			(
-				 SITE_CODE
+				 AUTH_GRP_CD
+				,SITE_CODE
 				,MENU_PID
 				,MENU_ID
 			) IN
 		<foreach collection="list" item="item" open="(" close=")" separator=",">
 			(
-				 #{item.siteCode}
+				 #{item.authGrpCd}
+				,#{item.siteCode}
 				,#{item.menuPid}
 				,#{item.menuId}
 			)
 		</foreach>
 	</delete>
+
+	<!-- 메뉴 상세 정보 조회 -->
+	<select id="selectMenuDtl" parameterType="Map" resultType="Map">
+		/* AdminMenuMapper.selectMenuDtl */
+		SELECT
+			 A.MENU_NM		AS menuNm
+			,A.MENU_ORDR	AS menuOrdr
+			,A.MENU_TYPE	AS menuType
+			,A.BBS_SEQ		AS bbsSeq
+			,A.MENU_DEPTH	AS menuDepth
+			,A.MENU_URL		AS menuUrl
+			,B.USE_YN		AS nttRdcntYn
+		FROM
+			TB_MENU A
+		LEFT JOIN
+			TB_BOARD_MST_FIELD B
+		ON
+			A.BBS_SEQ = B.BBS_SEQ
+		AND
+			COLUMN_NM = 'NTT_RDCNT'
+		WHERE
+			A.MENU_ID = #{mId}
+		AND
+			A.MENU_PID = #{mPid}
+		AND
+			A.SITE_CODE = 'admin'
+	</select>
 </mapper>

@@ -75,9 +75,9 @@ $(function(){
 
 // 메뉴 이동
 function fn_goMenu(url, id, pid) {
-	$("#menuUrl").val(url);
-	$("#menuId").val(id);
-	$("#menuPid").val(pid);
+	$("#menuForm #menuUrl").val(url);
+	$("#menuForm #menuId").val(id);
+	$("#menuForm #menuPid").val(pid);
 
 	$("#menuForm").attr("action", url);
 	$("#menuForm").submit();

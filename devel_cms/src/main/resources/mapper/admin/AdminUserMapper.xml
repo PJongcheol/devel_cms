@@ -73,7 +73,7 @@
 			</if>
 		</where>
 		ORDER BY
-			UPD_DT DESC
+			JOIN_DE DESC
 		LIMIT #{offset}, #{pageSize}
 	</select>
 

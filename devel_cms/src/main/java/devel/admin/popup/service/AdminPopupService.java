@@ -52,7 +52,7 @@ public interface AdminPopupService {
 	 * @return void
 	 * @exception Exception
 	 */
-	public void savePopup(Map<String, Object> param, List<MultipartFile> files) throws Exception;
+	public void savePopup(Map<String, Object> param) throws Exception;
 
 	/**
 	 * 팝업 삭제

@@ -210,7 +210,7 @@
 		                        		<c:otherwise>
 		                        			<c:forEach var="file" items="${fileList }">
 		                        				<div class="file-item">
-			                        				<a href="javascript:void(0)" onclick="fn_fileDownload('${file.atchfileno}', '${file.fileord }', '${file.orgfilenm }', '${file.svfilenm }', '${file.filedir }')"><span>${file.orgfilenm }</span></a>
+			                        				<a href="javascript:void(0)" onclick="fn_fileDownload('${file.atchfileno}', '${file.fileord }')"><span>${file.orgfilenm }</span></a>
 													<button type="button" onclick="fn_fileDel('${file.atchfileno}', '${file.fileord }')">삭제</button>
 												</div>
 		                        			</c:forEach>

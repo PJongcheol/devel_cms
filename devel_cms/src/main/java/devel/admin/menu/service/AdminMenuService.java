@@ -84,4 +84,12 @@ public interface AdminMenuService {
 	 * @exception Exception
 	 */
 	public void deleteMenuAuth(List<Map<String, Object>> param) throws Exception;
+
+	/**
+	 * 메뉴 상세 정보 조회
+	 * @param Map
+	 * @return Map
+	 * @exception Exception
+	 */
+	public Map<String, Object> selectMenuDtl(Map<String, Object> param) throws Exception;
 }

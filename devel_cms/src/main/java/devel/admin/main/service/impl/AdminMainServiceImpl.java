@@ -32,7 +32,7 @@ public class AdminMainServiceImpl implements AdminMainService{
 
 	/**
 	 * 팝업 목록 조회
-	 * @param Map
+	 * @param
 	 * @return List
 	 * @exception Exception
 	 */
@@ -54,7 +54,7 @@ public class AdminMainServiceImpl implements AdminMainService{
 
 	/**
 	 * 대시보드 상단 조회
-	 * @param Map
+	 * @param
 	 * @return Map
 	 * @exception Exception
 	 */
@@ -65,12 +65,23 @@ public class AdminMainServiceImpl implements AdminMainService{
 
 	/**
 	 * 대시보드 회원 목록 조회
-	 * @param Map
+	 * @param
 	 * @return List
 	 * @exception Exception
 	 */
 	@Override
 	public List<Map<String, Object>> selectIndexMemberList() throws Exception {
 		return adminMainMapper.selectIndexMemberList();
+	}
+
+	/**
+	 * 대시보드 공지사항 목록 조회
+	 * @param Map
+	 * @return List
+	 * @exception Exception
+	 */
+	@Override
+	public List<Map<String, Object>> selectBbsList(Map<String, Object> param) throws Exception {
+		return adminMainMapper.selectBbsList(param);
 	}
 }
