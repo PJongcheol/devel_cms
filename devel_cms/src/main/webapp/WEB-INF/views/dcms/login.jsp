@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>CMS</title>
 <link rel="stylesheet" href="<c:url value='/css/devel.css'/>">
+<link href="/images/favicon.ico" id="favicon" rel="shortcut icon" sizes="64x64" type="image/x-icon">
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
