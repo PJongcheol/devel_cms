@@ -43,7 +43,7 @@
 		    </exclusions>
 		</dependency>
 
-		<!-- 외부 톰캣용 -->
+		<!-- 외부 톰캣용. -->
 		<dependency>
 		    <groupId>org.springframework.boot</groupId>
 		    <artifactId>spring-boot-starter-tomcat</artifactId>
