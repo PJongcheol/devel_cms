@@ -327,3 +327,8 @@ body {
 .footer {
     margin-top: auto;
 }
+
+.required-label::after {
+    content: " *";
+    color: red;
+}

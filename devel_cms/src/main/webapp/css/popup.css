@@ -46,3 +46,8 @@ body {
     color: #fff;
     cursor: pointer;
 }
+
+.required-label::after {
+    content: " *";
+    color: red;
+}
